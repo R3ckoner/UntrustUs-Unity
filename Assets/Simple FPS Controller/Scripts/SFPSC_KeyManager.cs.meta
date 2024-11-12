@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: df84b968f9c84614c894fe09def106af
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 173881
+  packageName: Simple FPS Controller v1.4
+  packageVersion: 1.4.4
+  assetPath: Assets/Simple FPS Controller/Scripts/SFPSC_KeyManager.cs
+  uploadId: 385463

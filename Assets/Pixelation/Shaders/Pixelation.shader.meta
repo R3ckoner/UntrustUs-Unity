@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 95703b29f49b899499233ea7308bb800
+timeCreated: 1466449911
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65554
+  packageName: Pixelation
+  packageVersion: 1.0
+  assetPath: Assets/Pixelation/Shaders/Pixelation.shader
+  uploadId: 124750

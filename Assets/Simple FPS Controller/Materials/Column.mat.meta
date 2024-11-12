@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 642c58687effb144e807ef92f589a91a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 173881
+  packageName: Simple FPS Controller v1.4
+  packageVersion: 1.4.4
+  assetPath: Assets/Simple FPS Controller/Materials/Column.mat
+  uploadId: 385463

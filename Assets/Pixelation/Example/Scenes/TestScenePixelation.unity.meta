@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 704f6cb87f631534ab77597da0df28ac
+timeCreated: 1466448568
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65554
+  packageName: Pixelation
+  packageVersion: 1.0
+  assetPath: Assets/Pixelation/Example/Scenes/TestScenePixelation.unity
+  uploadId: 124750

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2014dfd728f86a144b227ee6bd43e665
+timeCreated: 1466506467
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65554
+  packageName: Pixelation
+  packageVersion: 1.0
+  assetPath: Assets/Pixelation/Example/Scenes/TestSceneChunky.unity
+  uploadId: 124750

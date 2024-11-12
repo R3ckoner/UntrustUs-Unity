@@ -1,0 +1,12 @@
+newmtl Forest1/Dirt_01-128x128
+map_Kd textures/Forest1/Dirt_01-128x128.tga
+
+newmtl Forest1/Dirt_03-128x128
+map_Kd textures/Forest1/Dirt_03-128x128.tga
+
+newmtl Forest1/Metal_03-128x128
+map_Kd textures/Forest1/Metal_03-128x128.tga
+
+newmtl Forest1/Metal_12-128x128
+map_Kd textures/Forest1/Metal_12-128x128.tga
+

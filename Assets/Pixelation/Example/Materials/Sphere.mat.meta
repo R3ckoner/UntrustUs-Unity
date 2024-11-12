@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5ea5bdbe591ea6945b9188cd0da0c5a9
+timeCreated: 1466493513
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65554
+  packageName: Pixelation
+  packageVersion: 1.0
+  assetPath: Assets/Pixelation/Example/Materials/Sphere.mat
+  uploadId: 124750

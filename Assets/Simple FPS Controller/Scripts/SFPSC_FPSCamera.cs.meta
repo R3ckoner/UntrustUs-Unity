@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7e30682c720b6694681a0eb8b7252ad3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 173881
+  packageName: Simple FPS Controller v1.4
+  packageVersion: 1.4.4
+  assetPath: Assets/Simple FPS Controller/Scripts/SFPSC_FPSCamera.cs
+  uploadId: 385463

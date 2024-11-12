@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eb5f236ff5c587a459cc5c8b3ae142f1
+timeCreated: 1466450582
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65554
+  packageName: Pixelation
+  packageVersion: 1.0
+  assetPath: Assets/Pixelation/Example/Materials/Cube0.mat
+  uploadId: 124750
