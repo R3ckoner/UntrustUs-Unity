@@ -11,7 +11,7 @@ public class RaycastWeapon : MonoBehaviour
     public int reserveAmmo = 90;
     public float range = 100f;
     public float damage = 10f;
-    public float reloadTime = 1.5f; // Configurable reload time
+    public float reloadTime = 1.5f;
 
     [Header("UI Elements")]
     public TextMeshProUGUI magText;
@@ -27,6 +27,11 @@ public class RaycastWeapon : MonoBehaviour
     public Vector3 recoilRotation = new Vector3(-2f, 1f, 0f);
     public float recoilSmoothTime = 0.1f;
     public float recoilResetSpeed = 2f;
+
+    [Header("Reload Animation Settings")]
+    public Vector3 reloadPositionOffset = new Vector3(0, -0.5f, 0.3f);
+    public Vector3 reloadRotationOffset = new Vector3(30f, 0f, 0f);
+    public float reloadSmoothTime = 0.2f;
 
     [Header("Audio")]
     public AudioSource fireSound;
@@ -45,7 +50,9 @@ public class RaycastWeapon : MonoBehaviour
     private Quaternion currentRecoilRotation;
     private Quaternion recoilRotationVelocity;
 
-    void Start()
+    public bool IsReloading => isReloading; // Public property to expose reloading state
+
+    private void Start()
     {
         currentAmmo = magazineSize;
         originalPosition = weaponTransform.localPosition;
@@ -53,162 +60,122 @@ public class RaycastWeapon : MonoBehaviour
         UpdateAmmoUI();
     }
 
-    void Update()
+    private void Update()
     {
-        if (isReloading)
-            return; // Prevent firing while reloading
+        if (isReloading) return;
 
-        if ((isFullAuto && Input.GetButton("Fire1") || Input.GetButtonDown("Fire1")) && Time.time >= nextFireTime)
-        {
-            Fire();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(Reload());
-        }
+        HandleFiring();
+        HandleReloading();
 
         ResetRecoil();
     }
 
-void Fire()
-{
-    if (currentAmmo > 0)
+    private void HandleFiring()
     {
-        currentAmmo--;
-        nextFireTime = Time.time + fireRate;
-
-        // Play fire sound
-        fireSound?.Play();
-
-        // Use Main Camera for raycasting
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null)
+        if ((isFullAuto && Input.GetButton("Fire1") || Input.GetButtonDown("Fire1")) && Time.time >= nextFireTime)
         {
-            Debug.LogError("Main Camera not found!");
+            Fire();
+        }
+    }
+
+    private void Fire()
+    {
+        if (currentAmmo <= 0)
+        {
+            Debug.Log("Out of ammo!");
             return;
         }
 
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
+        currentAmmo--;
+        nextFireTime = Time.time + fireRate;
 
-        if (Physics.Raycast(ray, out hit, range))
+        fireSound?.Play();
+
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) return;
+
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
             Debug.Log($"Hit: {hit.collider.name}");
-
-            // Check if the hit object has a TurretController
-            TurretController turret = hit.collider.GetComponent<TurretController>();
-            if (turret != null)
-            {
-                turret.TakeDamage((int)damage); // Apply damage
-                Debug.Log("Turret hit!");
-            }
+            var turret = hit.collider.GetComponent<TurretController>();
+            turret?.TakeDamage((int)damage);
         }
         else
         {
             Debug.Log("Missed!");
         }
 
-        // Show Muzzle Flash and Apply Recoil
         ShowMuzzleFlash();
         ApplyRecoil();
-
         UpdateAmmoUI();
     }
-    else
+
+    private void HandleReloading()
     {
-        Debug.Log("Out of ammo!");
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < magazineSize && reserveAmmo > 0)
+        {
+            StartCoroutine(Reload());
+        }
     }
-}
 
-    IEnumerator Reload()
+    private IEnumerator Reload()
     {
-        if (currentAmmo == magazineSize || reserveAmmo == 0)
-        {
-            Debug.Log("No need to reload!");
-            yield break; // Exit if the magazine is full or no reserve ammo
-        }
-
         isReloading = true;
-        Debug.Log("Reloading...");
+        reloadSound?.Play();
 
-        // Play reload sound
-        if (reloadSound != null)
-        {
-            reloadSound.Play();
-        }
+        Vector3 targetPosition = originalPosition + reloadPositionOffset;
+        Quaternion targetRotation = originalRotation * Quaternion.Euler(reloadRotationOffset);
 
-        yield return new WaitForSeconds(reloadTime); // Wait for reload time
+        yield return MoveWeapon(targetPosition, targetRotation, reloadTime * 0.5f);
+        yield return new WaitForSeconds(reloadTime * 0.5f);
 
-        int ammoNeeded = magazineSize - currentAmmo;
-
-        if (reserveAmmo >= ammoNeeded)
-        {
-            reserveAmmo -= ammoNeeded;
-            currentAmmo = magazineSize;
-        }
-        else
-        {
-            currentAmmo += reserveAmmo;
-            reserveAmmo = 0;
-        }
+        int ammoToReload = Mathf.Min(magazineSize - currentAmmo, reserveAmmo);
+        currentAmmo += ammoToReload;
+        reserveAmmo -= ammoToReload;
 
         isReloading = false;
         UpdateAmmoUI();
     }
 
-    void UpdateAmmoUI()
+    private IEnumerator MoveWeapon(Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            weaponTransform.localPosition = Vector3.Lerp(weaponTransform.localPosition, targetPosition, reloadSmoothTime);
+            weaponTransform.localRotation = Quaternion.Lerp(weaponTransform.localRotation, targetRotation, reloadSmoothTime);
+            yield return null;
+        }
+    }
+
+    private void UpdateAmmoUI()
     {
         magText.text = currentAmmo.ToString();
         bagText.text = reserveAmmo.ToString();
     }
 
-    void ShowMuzzleFlash()
+    private void ShowMuzzleFlash()
     {
-        if (muzzleFlashPrefab != null && muzzlePoint != null)
-        {
-            GameObject muzzleFlash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation, muzzlePoint);
-            Destroy(muzzleFlash, 0.1f);
-        }
+        if (muzzleFlashPrefab == null || muzzlePoint == null) return;
+
+        var muzzleFlash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation, muzzlePoint);
+        Destroy(muzzleFlash, 0.1f);
     }
 
-    void ApplyRecoil()
+    private void ApplyRecoil()
     {
-        if (weaponTransform != null)
-        {
-            currentRecoilPosition += recoilKickback;
-            currentRecoilRotation *= Quaternion.Euler(recoilRotation);
-        }
+        currentRecoilPosition += recoilKickback;
+        currentRecoilRotation *= Quaternion.Euler(recoilRotation);
     }
 
-    void ResetRecoil()
+    private void ResetRecoil()
     {
-        if (weaponTransform != null)
-        {
-            currentRecoilPosition = Vector3.SmoothDamp(
-                currentRecoilPosition,
-                Vector3.zero,
-                ref recoilPositionVelocity,
-                recoilSmoothTime
-            );
+        currentRecoilPosition = Vector3.SmoothDamp(currentRecoilPosition, Vector3.zero, ref recoilPositionVelocity, recoilSmoothTime);
+        currentRecoilRotation = Quaternion.Slerp(currentRecoilRotation, Quaternion.identity, Time.deltaTime * recoilResetSpeed);
 
-            currentRecoilRotation = Quaternion.Slerp(
-                currentRecoilRotation,
-                Quaternion.identity,
-                Time.deltaTime * recoilResetSpeed
-            );
-
-            weaponTransform.localPosition = Vector3.Lerp(
-                weaponTransform.localPosition,
-                originalPosition + currentRecoilPosition,
-                Time.deltaTime * recoilResetSpeed
-            );
-
-            weaponTransform.localRotation = Quaternion.Slerp(
-                weaponTransform.localRotation,
-                originalRotation * currentRecoilRotation,
-                Time.deltaTime * recoilResetSpeed
-            );
-        }
+        weaponTransform.localPosition = Vector3.Lerp(weaponTransform.localPosition, originalPosition + currentRecoilPosition, Time.deltaTime * recoilResetSpeed);
+        weaponTransform.localRotation = Quaternion.Slerp(weaponTransform.localRotation, originalRotation * currentRecoilRotation, Time.deltaTime * recoilResetSpeed);
     }
 }

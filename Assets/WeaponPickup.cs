@@ -48,9 +48,29 @@ public class WeaponPickup : MonoBehaviour
                     uiManager.ShowHappyFace(1f);
                 }
 
-                // Destroy the pickup object after collection
-                Destroy(gameObject, pickupSound.length); // Wait for sound to finish before destroying
+                // Disable visual and collider components
+                HidePickup();
+
+                // Destroy the pickup object after the sound finishes
+                Destroy(gameObject, pickupSound.length);
             }
+        }
+    }
+
+    private void HidePickup()
+    {
+        // Disable renderer(s) to hide the object
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = false;
+        }
+
+        // Disable collider(s) to prevent further interactions
+        Collider[] colliders = GetComponents<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
         }
     }
 }

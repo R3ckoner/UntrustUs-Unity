@@ -3,20 +3,23 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     [Header("Turret Settings")]
-    public Transform turretHead;           
-    public Transform firePoint;            
-    public GameObject projectilePrefab;    
-    public float rotationSpeed = 5f;       
-    public float fireRate = 1f;            
-    public float detectionRange = 20f;     
+    public Transform turretHead;
+    public Transform firePoint;
+    public GameObject projectilePrefab;
+    public float rotationSpeed = 5f;
+    public float fireRate = 1f;
+    public float detectionRange = 20f;
 
     [Header("Health Settings")]
-    public int maxHealth = 100; // Turret's maximum health
+    public int maxHealth = 100;
     private int currentHealth;
 
     [Header("Audio Settings")]
-    public AudioSource fireAudioSource;    
-    public AudioSource deathAudioSource; // Optional death sound
+    public AudioSource fireAudioSource;
+    public AudioSource deathAudioSource;
+
+    [Header("Rewards")]
+    public int rewardAmount = 50; // Amount of money rewarded on turret kill
 
     private Transform player;
     private float fireTimer;
@@ -24,7 +27,7 @@ public class TurretController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        currentHealth = maxHealth; // Set initial health
+        currentHealth = maxHealth;
         fireTimer = 0f;
     }
 
@@ -76,8 +79,6 @@ public class TurretController : MonoBehaviour
     {
         currentHealth -= damage;
 
-        Debug.Log($"Turret hit! Current Health: {currentHealth}");
-
         if (currentHealth <= 0)
         {
             Die();
@@ -88,14 +89,20 @@ public class TurretController : MonoBehaviour
     {
         Debug.Log("Turret destroyed!");
 
+        // Reward the player
+        var playerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
+        if (playerMoneyManager != null)
+        {
+            playerMoneyManager.AddMoney(rewardAmount);
+        }
+
         // Play death sound if available
         if (deathAudioSource != null)
         {
             deathAudioSource.Play();
         }
 
-        // Optionally play a destruction animation here
-        Destroy(gameObject, 0.5f); // Slight delay to allow death sound to play
+        Destroy(gameObject, 0.5f);
     }
 
     void OnDrawGizmosSelected()
