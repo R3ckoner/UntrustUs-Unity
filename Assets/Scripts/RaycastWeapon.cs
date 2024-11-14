@@ -5,6 +5,7 @@ using System.Collections;
 public class RaycastWeapon : MonoBehaviour
 {
     [Header("Weapon Configuration")]
+    public string weaponName = "Default Weapon"; // Name of the weapon
     public float fireRate = 0.1f;
     public bool isFullAuto = true;
     public int magazineSize = 30;
@@ -16,6 +17,7 @@ public class RaycastWeapon : MonoBehaviour
     [Header("UI Elements")]
     public TextMeshProUGUI magText;
     public TextMeshProUGUI bagText;
+    public TextMeshProUGUI weaponNameText; // Weapon name display
 
     [Header("Effects")]
     public GameObject muzzleFlashPrefab;
@@ -50,7 +52,7 @@ public class RaycastWeapon : MonoBehaviour
     private Quaternion currentRecoilRotation;
     private Quaternion recoilRotationVelocity;
 
-    public bool IsReloading => isReloading; // Public property to expose reloading state
+    public bool IsReloading => isReloading;
 
     private void Start()
     {
@@ -58,6 +60,7 @@ public class RaycastWeapon : MonoBehaviour
         originalPosition = weaponTransform.localPosition;
         originalRotation = weaponTransform.localRotation;
         UpdateAmmoUI();
+        UpdateWeaponNameUI();
     }
 
     private void Update()
@@ -66,7 +69,6 @@ public class RaycastWeapon : MonoBehaviour
 
         HandleFiring();
         HandleReloading();
-
         ResetRecoil();
     }
 
@@ -154,6 +156,14 @@ public class RaycastWeapon : MonoBehaviour
     {
         magText.text = currentAmmo.ToString();
         bagText.text = reserveAmmo.ToString();
+    }
+
+    public void UpdateWeaponNameUI()
+    {
+        if (weaponNameText != null)
+        {
+            weaponNameText.text = weaponName;
+        }
     }
 
     private void ShowMuzzleFlash()

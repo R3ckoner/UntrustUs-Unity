@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public GameObject[] weapons;
-    private bool[] weaponPickedUp;
+    public GameObject[] weapons; // Array of all weapons
+    private bool[] weaponPickedUp; // Tracks if a weapon is picked up
     private int currentWeaponIndex = -1;
 
     private void Start()
     {
         weaponPickedUp = new bool[weapons.Length];
+        
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].SetActive(false);
+            weapons[i].SetActive(false); // Disable all weapons at the start
         }
     }
 
@@ -31,7 +32,9 @@ public class WeaponManager : MonoBehaviour
 
             weapons[weaponIndex].SetActive(true);
             currentWeaponIndex = weaponIndex;
-            Debug.Log($"Equipped Weapon {weaponIndex + 1}");
+
+            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+            weapon?.UpdateWeaponNameUI();
         }
     }
 
@@ -39,19 +42,18 @@ public class WeaponManager : MonoBehaviour
     {
         if (weaponIndex >= 0 && weaponIndex < weapons.Length)
         {
-            weaponPickedUp[weaponIndex] = true;
-            EquipWeapon(weaponIndex);
+            weaponPickedUp[weaponIndex] = true; // Mark as picked up
+            EquipWeapon(weaponIndex); // Equip the picked-up weapon
+            Debug.Log($"Picked up weapon: {weapons[weaponIndex].name}");
+        }
+        else
+        {
+            Debug.LogError("Invalid weapon index.");
         }
     }
 
     private void HandleWeaponSwitching()
     {
-        if (currentWeaponIndex >= 0 && weapons[currentWeaponIndex].GetComponent<RaycastWeapon>().IsReloading)
-        {
-            Debug.Log("Cannot switch weapons while reloading.");
-            return;
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponPickedUp[0]) EquipWeapon(0);
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponPickedUp[1]) EquipWeapon(1);
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponPickedUp[2]) EquipWeapon(2);
