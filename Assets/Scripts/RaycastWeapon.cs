@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class RaycastWeapon : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RaycastWeapon : MonoBehaviour
     public int reserveAmmo = 90;
     public float range = 100f;
     public float damage = 10f;
+    public float reloadTime = 1.5f; // Configurable reload time
 
     [Header("UI Elements")]
     public TextMeshProUGUI magText;
@@ -32,6 +34,7 @@ public class RaycastWeapon : MonoBehaviour
 
     private int currentAmmo;
     private float nextFireTime = 0f;
+    private bool isReloading = false;
 
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -52,6 +55,9 @@ public class RaycastWeapon : MonoBehaviour
 
     void Update()
     {
+        if (isReloading)
+            return; // Prevent firing while reloading
+
         if ((isFullAuto && Input.GetButton("Fire1") || Input.GetButtonDown("Fire1")) && Time.time >= nextFireTime)
         {
             Fire();
@@ -59,50 +65,83 @@ public class RaycastWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            StartCoroutine(Reload());
         }
 
         ResetRecoil();
     }
 
-    void Fire()
+void Fire()
+{
+    if (currentAmmo > 0)
     {
-        if (currentAmmo > 0)
+        currentAmmo--;
+        nextFireTime = Time.time + fireRate;
+
+        // Play fire sound
+        fireSound?.Play();
+
+        // Use Main Camera for raycasting
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
         {
-            currentAmmo--;
-            nextFireTime = Time.time + fireRate;
+            Debug.LogError("Main Camera not found!");
+            return;
+        }
 
-            // Play fire sound
-            if (fireSound != null)
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, range))
+        {
+            Debug.Log($"Hit: {hit.collider.name}");
+
+            // Check if the hit object has a TurretController
+            TurretController turret = hit.collider.GetComponent<TurretController>();
+            if (turret != null)
             {
-                fireSound.Play();
+                turret.TakeDamage((int)damage); // Apply damage
+                Debug.Log("Turret hit!");
             }
-
-            // Raycasting
-            RaycastHit hit;
-            if (Physics.Raycast(muzzlePoint.position, muzzlePoint.forward, out hit, range))
-            {
-                Debug.Log($"Hit: {hit.collider.name}");
-                // Apply damage logic if applicable
-            }
-
-            // Muzzle Flash
-            ShowMuzzleFlash();
-
-            // Apply Recoil
-            ApplyRecoil();
-
-            UpdateAmmoUI();
         }
         else
         {
-            Debug.Log("Out of ammo!");
+            Debug.Log("Missed!");
         }
-    }
 
-    void Reload()
+        // Show Muzzle Flash and Apply Recoil
+        ShowMuzzleFlash();
+        ApplyRecoil();
+
+        UpdateAmmoUI();
+    }
+    else
     {
+        Debug.Log("Out of ammo!");
+    }
+}
+
+    IEnumerator Reload()
+    {
+        if (currentAmmo == magazineSize || reserveAmmo == 0)
+        {
+            Debug.Log("No need to reload!");
+            yield break; // Exit if the magazine is full or no reserve ammo
+        }
+
+        isReloading = true;
+        Debug.Log("Reloading...");
+
+        // Play reload sound
+        if (reloadSound != null)
+        {
+            reloadSound.Play();
+        }
+
+        yield return new WaitForSeconds(reloadTime); // Wait for reload time
+
         int ammoNeeded = magazineSize - currentAmmo;
+
         if (reserveAmmo >= ammoNeeded)
         {
             reserveAmmo -= ammoNeeded;
@@ -114,12 +153,7 @@ public class RaycastWeapon : MonoBehaviour
             reserveAmmo = 0;
         }
 
-        // Play reload sound
-        if (reloadSound != null)
-        {
-            reloadSound.Play();
-        }
-
+        isReloading = false;
         UpdateAmmoUI();
     }
 

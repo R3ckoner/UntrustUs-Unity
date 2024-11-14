@@ -1,30 +1,4 @@
-﻿/*
-    ███████╗██╗██████╗  ██████╗████████╗  ██████╗ ███████╗██████╗  ██████╗ █████╗ ███╗  ██╗
-    ██╔════╝██║██╔══██╗██╔════╝╚══██╔══╝  ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗████╗ ██║
-    █████╗  ██║██████╔╝╚█████╗    ██║     ██████╔╝█████╗  ██████╔╝╚█████╗ ██║  ██║██╔██╗██║
-    ██╔══╝  ██║██╔══██╗ ╚═══██╗   ██║     ██╔═══╝ ██╔══╝  ██╔══██╗ ╚═══██╗██║  ██║██║╚████║
-    ██║     ██║██║  ██║██████╔╝   ██║     ██║     ███████╗██║  ██║██████╔╝╚█████╔╝██║ ╚███║
-    ╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝    ╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝╚═════╝  ╚════╝ ╚═╝  ╚══╝
-
-     █████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ 
-    ██╔══██╗██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗
-    ██║  ╚═╝███████║██╔████╔██║█████╗  ██████╔╝███████║
-    ██║  ██╗██╔══██║██║╚██╔╝██║██╔══╝  ██╔══██╗██╔══██║
-    ╚█████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║  ██║██║  ██║
-     ╚════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
-
-     █████╗  █████╗ ███╗  ██╗████████╗██████╗  █████╗ ██╗     ██╗     ███████╗██████╗ 
-    ██╔══██╗██╔══██╗████╗ ██║╚══██╔══╝██╔══██╗██╔══██╗██║     ██║     ██╔════╝██╔══██╗
-    ██║  ╚═╝██║  ██║██╔██╗██║   ██║   ██████╔╝██║  ██║██║     ██║     █████╗  ██████╔╝
-    ██║  ██╗██║  ██║██║╚████║   ██║   ██╔══██╗██║  ██║██║     ██║     ██╔══╝  ██╔══██╗
-    ╚█████╔╝╚█████╔╝██║ ╚███║   ██║   ██║  ██║╚█████╔╝███████╗███████╗███████╗██║  ██║
-     ╚════╝  ╚════╝ ╚═╝  ╚══╝   ╚═╝   ╚═╝  ╚═╝ ╚════╝ ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
-
-    █▄▄ █▄█   ▀█▀ █ █ █▀▀   █▀▄ █▀▀ █ █ █▀▀ █   █▀█ █▀█ █▀▀ █▀█
-    █▄█  █     █  █▀█ ██▄   █▄▀ ██▄ ▀▄▀ ██▄ █▄▄ █▄█ █▀▀ ██▄ █▀▄
-*/
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -32,7 +6,7 @@ public class SFPSC_FPSCamera : MonoBehaviour
 {
     public static SFPSC_FPSCamera cam;
     private Camera cam_;
-    
+
     public float sensitivity = 3;
     [HideInInspector]
     public float mouseX, mouseY;
@@ -40,34 +14,71 @@ public class SFPSC_FPSCamera : MonoBehaviour
     public float maxDownAngle = -80;
     public Transform player;
     public Transform CameraPosition;
-    
+
+    private float rotX = 0.0f, rotY = 0.0f;
+    [HideInInspector]
+    public float rotZ = 0.0f;
+
+    [Header("GameBoy Effect Settings")]
+    [Tooltip("Place the palette Material you want (by default GameBoyShader)")]
+    public Material palette;
+
+    [Tooltip("The bigger downSampleSize --> the more pixelated (by default = 2)")]
+    public int downsampleSize = 2;
+
     private void Awake()
     {
         cam = this;
-        cam_ = this.GetComponent<Camera>();
+        cam_ = GetComponent<Camera>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
-    private float rotX = 0.0f, rotY = 0.0f;
-    [HideInInspector]
-    public float rotZ = 0.0f;
-    private void Update()
+
+    private void LateUpdate()
     {
         // Mouse input
         mouseX = Input.GetAxis("Mouse X") * sensitivity;
         mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        // Calculations
+        // Calculate rotation
         rotX -= mouseY;
         rotX = Mathf.Clamp(rotX, maxDownAngle, maxUpAngle);
         rotY += mouseX;
 
-        // Placing values
+        // Apply calculated rotations
         transform.localRotation = Quaternion.Euler(rotX, rotY, rotZ);
         player.Rotate(Vector3.up * mouseX);
-        transform.position = CameraPosition.position;
+
+        // Keep Camera position synced without breaking post-processing
+        if (CameraPosition != null)
+        {
+            transform.position = CameraPosition.position;
+        }
+    }
+
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+        if (palette == null)
+        {
+            Debug.LogError("You must assign a palette Material to GameBoy Effect Script");
+            Graphics.Blit(source, destination);
+            return;
+        }
+
+        // Downsample
+        int width = source.width / downsampleSize;
+        int height = source.height / downsampleSize;
+
+        RenderTexture temp = RenderTexture.GetTemporary(width, height, 0, source.format);
+        temp.filterMode = FilterMode.Point; // Avoid interpolation for pixelated look
+
+        // Obtain a smaller version of the source input
+        Graphics.Blit(source, temp);
+
+        // Apply GameBoy palette shader effect
+        Graphics.Blit(temp, destination, palette);
+        RenderTexture.ReleaseTemporary(temp);
     }
 
     public void Shake(float magnitude, float duration)
@@ -78,9 +89,9 @@ public class SFPSC_FPSCamera : MonoBehaviour
     private IEnumerator IShake(float mag, float dur)
     {
         WaitForEndOfFrame wfeof = new WaitForEndOfFrame();
-        for(float t = 0.0f; t <= dur; t += Time.deltaTime)
+        for (float t = 0.0f; t <= dur; t += Time.deltaTime)
         {
-            rotZ = Random.Range(-mag, mag) * (t / dur - 1.0f);
+            rotZ = Random.Range(-mag, mag) * (1.0f - t / dur);
             yield return wfeof;
         }
         rotZ = 0.0f;

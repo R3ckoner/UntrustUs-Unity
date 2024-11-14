@@ -4,6 +4,5 @@ using UnityEngine;
 public class SeedItem : ScriptableObject
 {
     public string seedName;
-    public GameObject cropPrefab; // Prefab of the crop to grow
-    public Sprite seedIcon;       // (Optional) Icon for UI
+    public GameObject cropPrefab; // Prefab to plant
 }

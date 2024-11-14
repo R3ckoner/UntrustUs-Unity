@@ -7,7 +7,6 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        // Select the first seed in the inventory with the '1' key
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventory.Count > 0)
         {
             SelectSeed(inventory[0]);
@@ -17,12 +16,11 @@ public class InventoryManager : MonoBehaviour
     public void AddSeed(SeedItem seed)
     {
         inventory.Add(seed);
-        Debug.Log($"Picked up {seed.seedName}");
+        Debug.Log($"{seed.seedName} added to inventory.");
     }
 
     public void SelectSeed(SeedItem seed)
     {
         FindObjectOfType<GridGenerator>().SelectSeed(seed);
-        Debug.Log($"{seed.seedName} selected for planting.");
     }
 }

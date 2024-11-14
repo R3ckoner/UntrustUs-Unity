@@ -1,7 +1,7 @@
 using UnityEngine;
 
 #if UNITY_EDITOR
-using UnityEditor; // Required for custom editor functionality
+using UnityEditor; // For custom editor functionality
 #endif
 
 public class GridGenerator : MonoBehaviour
@@ -12,7 +12,10 @@ public class GridGenerator : MonoBehaviour
     public GameObject gridCellPrefab; // Prefab for the grid cell
     public bool generateOnStart = false; // Allow grid to auto-generate at runtime
     public LayerMask plantableLayer; // Only allow planting on tiles
+    public Material highlightMaterial; // Highlight material for valid tiles
 
+    private Material originalMaterial;
+    private GameObject highlightedTile;
     private GameObject selectedCrop; // Crop prefab from selected seed
 
     public void GenerateGrid()
@@ -39,12 +42,6 @@ public class GridGenerator : MonoBehaviour
                 GameObject newCell = Instantiate(gridCellPrefab, cellPosition, Quaternion.identity, transform);
                 newCell.name = $"GridCell_{x}_{z}";
                 newCell.layer = LayerMask.NameToLayer("Plantable");
-#if UNITY_EDITOR
-                if (!Application.isPlaying)
-                {
-                    Undo.RegisterCreatedObjectUndo(newCell, "Create Grid Cell");
-                }
-#endif
             }
         }
     }
@@ -60,40 +57,92 @@ public class GridGenerator : MonoBehaviour
     public void SelectSeed(SeedItem seed)
     {
         selectedCrop = seed.cropPrefab;
+        Debug.Log($"{seed.seedName} selected for planting.");
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && selectedCrop != null)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        HandleTileHighlighting();
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, plantableLayer))
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (selectedCrop == null)
             {
-                PlantSeed(hit.point);
+                Debug.LogWarning("No seed selected for planting!");
+                return;
+            }
+
+            if (highlightedTile != null)
+            {
+                PlantSeed(highlightedTile.transform.position);
+            }
+            else
+            {
+                Debug.LogWarning("No tile to plant on!");
             }
         }
     }
 
-    private void PlantSeed(Vector3 hitPoint)
+    private void HandleTileHighlighting()
     {
-        Vector3 gridPosition = new Vector3(
-            Mathf.Round(hitPoint.x),
-            0, // Keep crops aligned with grid
-            Mathf.Round(hitPoint.z)
-        );
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        if (!Physics.CheckSphere(gridPosition, 0.1f, plantableLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, plantableLayer))
         {
-            Instantiate(selectedCrop, gridPosition, Quaternion.identity);
-            selectedCrop = null; // Clear seed after planting
+            GameObject tile = hit.collider.gameObject;
+
+            if (highlightedTile != tile)
+            {
+                ClearHighlight();
+                HighlightTile(tile);
+            }
         }
         else
         {
-            Debug.Log("Tile is already occupied!");
+            ClearHighlight();
         }
     }
+
+    private void HighlightTile(GameObject tile)
+    {
+        highlightedTile = tile;
+        Renderer tileRenderer = tile.GetComponent<Renderer>();
+        if (tileRenderer != null)
+        {
+            originalMaterial = tileRenderer.material;
+            tileRenderer.material = highlightMaterial;
+        }
+        else
+        {
+            Debug.LogWarning($"Tile {tile.name} does not have a Renderer!");
+        }
+    }
+
+    private void ClearHighlight()
+    {
+        if (highlightedTile != null)
+        {
+            Renderer tileRenderer = highlightedTile.GetComponent<Renderer>();
+            if (tileRenderer != null)
+            {
+                tileRenderer.material = originalMaterial;
+            }
+            highlightedTile = null;
+        }
+    }
+
+    private void PlantSeed(Vector3 position)
+    {
+        if (Physics.CheckSphere(position, 0.1f, plantableLayer))
+        {
+            Debug.LogWarning("Tile is already occupied!");
+            return;
+        }
+
+        Instantiate(selectedCrop, position, Quaternion.identity);
+        Debug.Log($"Planted {selectedCrop.name} at {position}");
+        selectedCrop = null; // Clear after planting
+        ClearHighlight();
+    }
 }
-
-
