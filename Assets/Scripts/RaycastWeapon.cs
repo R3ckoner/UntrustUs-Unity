@@ -22,9 +22,13 @@ public class RaycastWeapon : MonoBehaviour
     [Header("Recoil Settings")]
     public Transform weaponTransform;
     public Vector3 recoilKickback = new Vector3(0f, 0.2f, -0.3f);
-    public Vector3 recoilRotation = new Vector3(-2f, 1f, 0f); // Adds upward and side recoil
+    public Vector3 recoilRotation = new Vector3(-2f, 1f, 0f);
     public float recoilSmoothTime = 0.1f;
     public float recoilResetSpeed = 2f;
+
+    [Header("Audio")]
+    public AudioSource fireSound;
+    public AudioSource reloadSound;
 
     private int currentAmmo;
     private float nextFireTime = 0f;
@@ -68,6 +72,12 @@ public class RaycastWeapon : MonoBehaviour
             currentAmmo--;
             nextFireTime = Time.time + fireRate;
 
+            // Play fire sound
+            if (fireSound != null)
+            {
+                fireSound.Play();
+            }
+
             // Raycasting
             RaycastHit hit;
             if (Physics.Raycast(muzzlePoint.position, muzzlePoint.forward, out hit, range))
@@ -104,6 +114,12 @@ public class RaycastWeapon : MonoBehaviour
             reserveAmmo = 0;
         }
 
+        // Play reload sound
+        if (reloadSound != null)
+        {
+            reloadSound.Play();
+        }
+
         UpdateAmmoUI();
     }
 
@@ -113,24 +129,19 @@ public class RaycastWeapon : MonoBehaviour
         bagText.text = reserveAmmo.ToString();
     }
 
-void ShowMuzzleFlash()
-{
-    if (muzzleFlashPrefab != null && muzzlePoint != null)
+    void ShowMuzzleFlash()
     {
-        // Instantiate the muzzle flash as a child of the muzzle point
-        GameObject muzzleFlash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation, muzzlePoint);
-        
-        // Optionally detach after a short duration to avoid keeping unnecessary objects
-        Destroy(muzzleFlash, 0.1f); // Adjust duration as necessary
+        if (muzzleFlashPrefab != null && muzzlePoint != null)
+        {
+            GameObject muzzleFlash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation, muzzlePoint);
+            Destroy(muzzleFlash, 0.1f);
+        }
     }
-}
-
 
     void ApplyRecoil()
     {
         if (weaponTransform != null)
         {
-            // Add recoil to position and rotation
             currentRecoilPosition += recoilKickback;
             currentRecoilRotation *= Quaternion.Euler(recoilRotation);
         }
@@ -140,7 +151,6 @@ void ShowMuzzleFlash()
     {
         if (weaponTransform != null)
         {
-            // Smoothly reset recoil position
             currentRecoilPosition = Vector3.SmoothDamp(
                 currentRecoilPosition,
                 Vector3.zero,
@@ -148,14 +158,12 @@ void ShowMuzzleFlash()
                 recoilSmoothTime
             );
 
-            // Smoothly reset recoil rotation
             currentRecoilRotation = Quaternion.Slerp(
                 currentRecoilRotation,
                 Quaternion.identity,
                 Time.deltaTime * recoilResetSpeed
             );
 
-            // Apply the recoil offset to the weapon transform
             weaponTransform.localPosition = Vector3.Lerp(
                 weaponTransform.localPosition,
                 originalPosition + currentRecoilPosition,
