@@ -89,11 +89,11 @@ public class TurretController : MonoBehaviour
     {
         Debug.Log("Turret destroyed!");
 
-        // Reward the player
-        var playerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
-        if (playerMoneyManager != null)
+        // Reward the player through PlayerHealth script
+        var playerHealth = FindObjectOfType<PlayerHealth>();
+        if (playerHealth != null)
         {
-            playerMoneyManager.AddMoney(rewardAmount);
+            playerHealth.AddMoney(rewardAmount);
         }
 
         // Play death sound if available

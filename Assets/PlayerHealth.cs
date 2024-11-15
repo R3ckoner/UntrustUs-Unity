@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = $"Health: {currentHealth}";
+            healthText.text = $"{currentHealth}";
         }
     }
 
@@ -99,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (moneyText != null)
         {
-            moneyText.text = $"Money: {totalMoney}";
+            moneyText.text = $"{totalMoney}";
         }
         else
         {
