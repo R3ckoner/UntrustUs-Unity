@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: TestSeed
   m_EditorClassIdentifier: 
   seedName: 
-  cropPrefab: {fileID: 919132149155446097, guid: 0dc773257bd0242db816e3b448e514ce, type: 3}
-  seedIcon: {fileID: 21300000, guid: 6c1ce6737b06c924f96a06359da012b8, type: 3}
+  cropPrefab: {fileID: 8572505473271179577, guid: 2916cc61cdc105149a65a627e0aa8996, type: 3}

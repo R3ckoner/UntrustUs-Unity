@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: FirstDialog
   m_EditorClassIdentifier: 
   RootNode:
-    dialogueText: Hey how's it going?
+    dialogueText: Hey I'm hear to show you how to farm! What do you wanna know?
     responses:
-    - responseText: Just fought like 8 machine guns...
+    - responseText: How do plant my seeds?
       nextNode:
-        dialogueText: Sorry to hear that
-        responses: []
-    - responseText: Pretty good to be honest!
+        dialogueText: Go over to that pickup by the house, then press "1" and then
+          click!
+        responses:
+        - responseText: Sounds simple!
+          nextNode:
+            dialogueText: Yeah not too bad :3
+            responses: []
+    - responseText: What just happened?
       nextNode:
-        dialogueText: Glad to hear that :3
+        dialogueText: Every couple nights the woods gets pretty loud... maybe it
+          has to do with that?
         responses: []

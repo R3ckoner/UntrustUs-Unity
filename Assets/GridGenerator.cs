@@ -6,9 +6,9 @@ using UnityEditor; // For custom editor functionality
 
 public class GridGenerator : MonoBehaviour
 {
-    public int gridWidth = 10;      // Number of columns
-    public int gridHeight = 10;     // Number of rows
-    public float cellSize = 1f;     // Size of each grid cell
+    public int gridWidth = 10; // Number of columns
+    public int gridHeight = 10; // Number of rows
+    public float cellSize = 1f; // Size of each grid cell
     public GameObject gridCellPrefab; // Prefab for the grid cell
     public bool generateOnStart = false; // Allow grid to auto-generate at runtime
     public LayerMask plantableLayer; // Only allow planting on tiles
@@ -128,16 +128,24 @@ public class GridGenerator : MonoBehaviour
             {
                 tileRenderer.material = originalMaterial;
             }
+
             highlightedTile = null;
         }
     }
 
     private void PlantSeed(Vector3 position)
     {
-        if (Physics.CheckSphere(position, 0.1f, plantableLayer))
+        // Check only for crops or objects that indicate occupation
+        Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f, ~plantableLayer);
+
+        foreach (var collider in hitColliders)
         {
-            Debug.LogWarning("Tile is already occupied!");
-            return;
+            if (collider.gameObject.CompareTag("Crop") ||
+                collider.gameObject.layer != LayerMask.NameToLayer("Plantable"))
+            {
+                Debug.LogWarning("Tile is already occupied!");
+                return;
+            }
         }
 
         Instantiate(selectedCrop, position, Quaternion.identity);
@@ -146,3 +154,4 @@ public class GridGenerator : MonoBehaviour
         ClearHighlight();
     }
 }
+
