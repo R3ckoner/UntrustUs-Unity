@@ -18,7 +18,10 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        HandleWeaponSwitching();
+        if (!IsCurrentWeaponReloading())
+        {
+            HandleWeaponSwitching();
+        }
     }
 
     public void EquipWeapon(int weaponIndex)
@@ -57,5 +60,18 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponPickedUp[0]) EquipWeapon(0);
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponPickedUp[1]) EquipWeapon(1);
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponPickedUp[2]) EquipWeapon(2);
+    }
+
+    public bool IsCurrentWeaponReloading()
+    {
+        if (currentWeaponIndex >= 0)
+        {
+            var currentWeapon = weapons[currentWeaponIndex].GetComponent<RaycastWeapon>();
+            if (currentWeapon != null)
+            {
+                return currentWeapon.IsReloading;
+            }
+        }
+        return false;
     }
 }

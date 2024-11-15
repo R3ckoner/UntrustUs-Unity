@@ -2537,7 +2537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &170470185
 BoxCollider:
@@ -2877,7 +2877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &220906491
 BoxCollider:
@@ -5370,7 +5370,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 12.5, z: 12.000001}
+  m_Size: {x: 1, y: 12.5, z: 1}
   m_Center: {x: 0, y: 6.25, z: 0}
 --- !u!1 &436683786
 GameObject:
@@ -6492,7 +6492,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 12.5, z: 12.000001}
+  m_Size: {x: 1, y: 12.5, z: 1}
   m_Center: {x: 0, y: 6.25, z: 0}
 --- !u!1 &562672420 stripped
 GameObject:
@@ -6716,7 +6716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &618169283
 BoxCollider:
@@ -13508,7 +13508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1144475385
 BoxCollider:
@@ -19982,7 +19982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1649239637
 BoxCollider:
@@ -24833,7 +24833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a1fc64f93034d86019f12659ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 25
+  healthAmount: 10
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1980129703
 BoxCollider:

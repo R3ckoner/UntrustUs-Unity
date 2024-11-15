@@ -30,7 +30,7 @@ public class WeaponPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             WeaponManager weaponManager = other.GetComponent<WeaponManager>();
-            if (weaponManager != null)
+            if (weaponManager != null && !weaponManager.IsCurrentWeaponReloading())
             {
                 weaponManager.PickupWeapon(weaponIndex);
                 Debug.Log($"Picked up Weapon {weaponIndex + 1}!");
@@ -53,6 +53,10 @@ public class WeaponPickup : MonoBehaviour
 
                 // Destroy the pickup object after the sound finishes
                 Destroy(gameObject, pickupSound.length);
+            }
+            else
+            {
+                Debug.Log("Cannot pick up weapon while reloading.");
             }
         }
     }
