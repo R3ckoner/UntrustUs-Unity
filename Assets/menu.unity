@@ -5045,8 +5045,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: UNTRUST US
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 746d014114f61438b8187bea5090e011, type: 2}
-  m_sharedMaterial: {fileID: 6364802668900789379, guid: 746d014114f61438b8187bea5090e011, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06c4e296b6ce79f43ad7ffe859cc60b9, type: 2}
+  m_sharedMaterial: {fileID: 8838797809965323525, guid: 06c4e296b6ce79f43ad7ffe859cc60b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7482,17 +7482,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Patch Notes:
+  m_text: 'PATCH NOTES:
 
 
-    Persistance
-
-    Map Polish
-
-    Portrait Update'
+    DIALOGUE V.1'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7aaec737710424a098579e64a32b5774, type: 2}
-  m_sharedMaterial: {fileID: -8882646197644515571, guid: 7aaec737710424a098579e64a32b5774, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
+  m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12303,10 +12299,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Farming Test
+  m_text: FARMING TEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7aaec737710424a098579e64a32b5774, type: 2}
-  m_sharedMaterial: {fileID: -8882646197644515571, guid: 7aaec737710424a098579e64a32b5774, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
+  m_sharedMaterial: {fileID: 1487345816453747253, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12330,8 +12326,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12829,8 +12825,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 299, y: -415}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 339.8631, y: -415}
+  m_SizeDelta: {x: 279.4153, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609815176
 MonoBehaviour:
@@ -12852,10 +12848,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: pre alpha test 0.4
+  m_text: PRE ALPHA TEST 0.5 (Web GL Build)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 746d014114f61438b8187bea5090e011, type: 2}
-  m_sharedMaterial: {fileID: 6364802668900789379, guid: 746d014114f61438b8187bea5090e011, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
+  m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13625,10 +13621,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Combat Test
+  m_text: COMBAT TEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7aaec737710424a098579e64a32b5774, type: 2}
-  m_sharedMaterial: {fileID: -8882646197644515571, guid: 7aaec737710424a098579e64a32b5774, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
+  m_sharedMaterial: {fileID: 1487345816453747253, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13652,8 +13648,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13946,8 +13942,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: UNTRUST US
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 746d014114f61438b8187bea5090e011, type: 2}
-  m_sharedMaterial: {fileID: 6364802668900789379, guid: 746d014114f61438b8187bea5090e011, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06c4e296b6ce79f43ad7ffe859cc60b9, type: 2}
+  m_sharedMaterial: {fileID: 8838797809965323525, guid: 06c4e296b6ce79f43ad7ffe859cc60b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14337,9 +14333,9 @@ RectTransform:
   - {fileID: 993396243}
   - {fileID: 1270819701}
   - {fileID: 1701940209}
+  - {fileID: 564641290}
   - {fileID: 1609815175}
   - {fileID: 863633100}
-  - {fileID: 564641290}
   - {fileID: 398223247}
   - {fileID: 217684579}
   - {fileID: 1691824218}
