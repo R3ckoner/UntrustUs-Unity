@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI Elements")]
     public TextMeshProUGUI healthText; // Reference to TMP health display
     public TextMeshProUGUI moneyText; // Reference to TMP money display
+    public GameObject sadFaceImage; // Reference to the sad face GameObject
 
     [Header("Death Settings")]
     public float reloadDelay = 2f; // Delay before reloading the scene
@@ -55,6 +56,12 @@ public class PlayerHealth : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = $"{currentHealth}";
+        }
+
+        // Show or hide sad face based on health threshold
+        if (sadFaceImage != null)
+        {
+            sadFaceImage.SetActive(currentHealth < 40);
         }
     }
 
