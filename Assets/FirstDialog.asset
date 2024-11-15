@@ -13,19 +13,28 @@ MonoBehaviour:
   m_Name: FirstDialog
   m_EditorClassIdentifier: 
   RootNode:
-    dialogueText: Hey I'm hear to show you how to farm! What do you wanna know?
+    dialogueText: "Hey, I\u2019m Claire! I\u2019m here to show you how to set up
+      your farm! What would you like to know?"
     responses:
-    - responseText: How do plant my seeds?
+    - responseText: How do I select and plant seeds?
       nextNode:
-        dialogueText: Go over to that pickup by the house, then press "1" and then
-          click!
+        dialogueText: "For right now, just head over to that box near the farm and
+          pick them up. Then head over to your plot, press \u201C1\u201D and click!"
         responses:
         - responseText: Sounds simple!
           nextNode:
             dialogueText: Yeah not too bad :3
             responses: []
-    - responseText: What just happened?
+    - responseText: What will plants do for me?
       nextNode:
-        dialogueText: Every couple nights the woods gets pretty loud... maybe it
-          has to do with that?
-        responses: []
+        dialogueText: Health benefits! Well besides the obvious mental health boost.
+          (Plants can be used for both health and other stat buffs)
+        responses:
+        - responseText: 'Ok well keep an eye out for my crops huh? '
+          nextNode:
+            dialogueText: "I know they\u2019ll be great :D"
+            responses: []
+        - responseText: "God this sounds hard\u2026"
+          nextNode:
+            dialogueText: "Don\u2019t give up yet, come on :( "
+            responses: []

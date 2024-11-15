@@ -37,6 +37,12 @@ public class SFPSC_FPSCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Prevent camera movement if dialogue is active
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
+        {
+            return;
+        }
+
         // Mouse input
         mouseX = Input.GetAxis("Mouse X") * sensitivity;
         mouseY = Input.GetAxis("Mouse Y") * sensitivity;
