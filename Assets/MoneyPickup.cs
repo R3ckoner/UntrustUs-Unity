@@ -25,17 +25,15 @@ public class MoneyPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var playerMoneyManager = other.GetComponent<PlayerMoneyManager>();
-            if (playerMoneyManager != null)
+            var playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
+                playerHealth.AddMoney(pickupValue);  // Use the AddMoney method from PlayerHealth
+
                 if (pickupSound != null)
                 {
                     audioSource.PlayOneShot(pickupSound);
                 }
-                playerMoneyManager.AddMoney(pickupValue);
-
-                // Play pickup sound if available
-
 
                 // Show happy face for 1 second
                 UIManager uiManager = FindObjectOfType<UIManager>();

@@ -25299,6 +25299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthText: {fileID: 1574584321}
+  moneyText: {fileID: 1625663356}
   reloadDelay: 0
   gameplaySceneName: teest
 --- !u!114 &1995913975
@@ -25308,7 +25309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995913955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac32831112d90744ca15c116951e4cf9, type: 3}
   m_Name: 
