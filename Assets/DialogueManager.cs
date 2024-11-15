@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI DialogTitleText, DialogBodyText;
     public GameObject responseButtonPrefab;
     public Transform responseButtonContainer;
+
+    // New portrait image reference
+    public RawImage NpcPortrait;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class DialogueManager : MonoBehaviour
         HideDialogue();
     }
 
-    public void StartDialogue(string title, DialogueNode node)
+    public void StartDialogue(string title, DialogueNode node, Texture portrait)
     {
         if (node == null)
         {
@@ -37,6 +40,17 @@ public class DialogueManager : MonoBehaviour
         ShowDialogue();
         DialogTitleText.text = title;
         DialogBodyText.text = node.dialogueText;
+
+        // Set NPC portrait
+        if (NpcPortrait != null && portrait != null)
+        {
+            NpcPortrait.texture = portrait;
+            NpcPortrait.gameObject.SetActive(true);
+        }
+        else if (NpcPortrait != null)
+        {
+            NpcPortrait.gameObject.SetActive(false); // Hide if no portrait
+        }
 
         // Clear existing response buttons
         foreach (Transform child in responseButtonContainer)
@@ -77,7 +91,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
     public void SelectResponse(DialogueResponse response, string title)
     {
         if (response == null)
@@ -86,9 +99,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (response.nextNode != null) // If there's a next node, continue dialogue
+        if (response.nextNode != null)
         {
-            StartDialogue(title, response.nextNode);
+            StartDialogue(title, response.nextNode, NpcPortrait.texture);
         }
         else
         {
@@ -96,7 +109,6 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
         }
     }
-
 
     public void EndDialogue()
     {
@@ -106,13 +118,13 @@ public class DialogueManager : MonoBehaviour
     public void HideDialogue()
     {
         DialogueParent.SetActive(false);
-        SetCursorVisibility(false); // Hide cursor when dialogue ends
+        SetCursorVisibility(false);
     }
 
     private void ShowDialogue()
     {
         DialogueParent.SetActive(true);
-        SetCursorVisibility(true); // Show cursor when dialogue starts
+        SetCursorVisibility(true);
     }
 
     public bool IsDialogueActive()

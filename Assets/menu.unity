@@ -7485,7 +7485,11 @@ MonoBehaviour:
   m_text: 'PATCH NOTES:
 
 
-    DIALOGUE V.1'
+    DIALOGUE V.2
+
+    NEW NPC
+
+    NPC BILLBOARD'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
@@ -11406,27 +11410,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalScale.x
-      value: 121.58526
+      value: 133.40335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalScale.y
-      value: 121.58526
+      value: 133.40335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalScale.z
-      value: 121.58526
+      value: 133.40335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 403.4
+      value: 404.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.6
+      value: 12.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 386.32455
+      value: 388.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df293dab4ec5a4d6e89a74b8607a4389, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12301,8 +12305,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FARMING TEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
-  m_sharedMaterial: {fileID: 1487345816453747253, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
+  m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12326,8 +12330,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12848,7 +12852,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PRE ALPHA TEST 0.5 (Web GL Build)
+  m_text: PRE ALPHA TEST 0.6 (Web GL Build)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
@@ -13623,8 +13627,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: COMBAT TEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
-  m_sharedMaterial: {fileID: 1487345816453747253, guid: 6e6ce0da52901cd4480cc092ece5dba4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
+  m_sharedMaterial: {fileID: -6364797444864455576, guid: 9dce9abde18b0b54f894fe55c144d38d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13648,8 +13652,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -4,11 +4,14 @@ public class Actor : MonoBehaviour
 {
     public string Name;
     public Dialogue Dialogue;
+
+    // New field for NPC portrait
+    public Texture NpcPortrait;
+
     private bool isPlayerInRange = false;
 
     private void Update()
     {
-        // Trigger dialogue only when the player presses E and is in range
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             SpeakTo();
@@ -17,7 +20,7 @@ public class Actor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Ensure the Player tag is correct
+        if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
             Debug.Log("Player in range. Press E to interact.");
@@ -30,7 +33,7 @@ public class Actor : MonoBehaviour
         {
             isPlayerInRange = false;
             Debug.Log("Player out of range.");
-            DialogueManager.Instance.EndDialogue(); // Optionally end dialogue on exit
+            DialogueManager.Instance.EndDialogue();
         }
     }
 
@@ -38,7 +41,7 @@ public class Actor : MonoBehaviour
     {
         if (Dialogue != null)
         {
-            DialogueManager.Instance.StartDialogue(Name, Dialogue.RootNode);
+            DialogueManager.Instance.StartDialogue(Name, Dialogue.RootNode, NpcPortrait);
         }
         else
         {
