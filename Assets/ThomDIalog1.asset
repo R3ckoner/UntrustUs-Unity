@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20917cfcd2af9c24e86a268cd9559689, type: 3}
+  m_Name: ThomDIalog1
+  m_EditorClassIdentifier: 
+  RootNode:
+    dialogueText: Hey, my name is Thom. Nice to meet you! I help out with livestock
+      around here, you moved into the farm right?
+    responses:
+    - responseText: Yep!
+      nextNode:
+        dialogueText: 'Once you settle in a bit come see me again to talk about getting
+          some animals on your farm! The products you can make from them are really
+          beneficial :D '
+        responses: []
