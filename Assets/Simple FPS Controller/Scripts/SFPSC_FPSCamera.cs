@@ -19,6 +19,9 @@ public class SFPSC_FPSCamera : MonoBehaviour
     [HideInInspector]
     public float rotZ = 0.0f;
 
+    // Flag to control whether mouse look is enabled
+    private bool isMouseLookEnabled = true;
+
     [Header("GameBoy Effect Settings")]
     [Tooltip("Place the palette Material you want (by default GameBoyShader)")]
     public Material palette;
@@ -37,6 +40,10 @@ public class SFPSC_FPSCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Prevent camera movement if mouse look is disabled
+        if (!isMouseLookEnabled)
+            return;
+
         // Prevent camera movement if dialogue is active
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
         {
@@ -87,6 +94,12 @@ public class SFPSC_FPSCamera : MonoBehaviour
         RenderTexture.ReleaseTemporary(temp);
     }
 
+    // Method to disable or enable mouse look
+    public void SetMouseLook(bool enable)
+    {
+        isMouseLookEnabled = enable;
+    }
+
     public void Shake(float magnitude, float duration)
     {
         StartCoroutine(IShake(magnitude, duration));
@@ -103,3 +116,4 @@ public class SFPSC_FPSCamera : MonoBehaviour
         rotZ = 0.0f;
     }
 }
+
