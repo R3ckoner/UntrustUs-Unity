@@ -6,19 +6,21 @@ public class MoneyPickup : MonoBehaviour
     public int pickupValue = 25; // Amount of money this pickup gives
 
     [Header("Effects")]
-    public AudioClip pickupSound;  // Optional: Sound clip that plays on pickup
-    private AudioSource audioSource;
+    public AudioSource audioSource;  // AudioSource to be triggered on pickup
 
     private void Start()
     {
-        // Ensure there's an AudioSource component on the GameObject
-        audioSource = GetComponent<AudioSource>();
+        // Ensure audioSource is assigned. If not, attempt to get one from the object.
         if (audioSource == null)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
         }
 
-        audioSource.playOnAwake = false; // Ensure sound doesn't play automatically
+        // Optionally, ensure playOnAwake is off if you don't want the audio to start automatically.
+        if (audioSource != null)
+        {
+            audioSource.playOnAwake = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,9 +32,10 @@ public class MoneyPickup : MonoBehaviour
             {
                 playerHealth.AddMoney(pickupValue);  // Use the AddMoney method from PlayerHealth
 
-                if (pickupSound != null)
+                // Trigger the AudioSource to play
+                if (audioSource != null)
                 {
-                    audioSource.PlayOneShot(pickupSound);
+                    audioSource.Play(); // Play the assigned AudioSource
                 }
 
                 // Show happy face for 1 second
