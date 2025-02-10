@@ -12,6 +12,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     // To store the original parent of the item
     [HideInInspector] public Transform parentAfterDrag;
 
+    // Public variable for how many inventory slots this item takes up
+    public Vector2Int slotsRequired = new Vector2Int(1, 1); // Default to 1x1 (1 slot)
+
     // Called when the drag starts
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -43,5 +46,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         
         // Re-enable raycasting for UI interaction
         image.raycastTarget = true;
+    }
+
+    // Call this to check how many slots the item will occupy
+    public bool CanFitInSlots(Vector2Int gridSize)
+    {
+        return gridSize.x >= slotsRequired.x && gridSize.y >= slotsRequired.y;
     }
 }
