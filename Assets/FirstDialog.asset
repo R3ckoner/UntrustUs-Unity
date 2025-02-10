@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: FirstDialog
   m_EditorClassIdentifier: 
   RootNode:
-    dialogueText: "Hey, I\u2019m Claire! I\u2019m here to show you how to set up
-      your farm! What would you like to know?"
+    dialogueText: "Hey, I\u2019m Claire! I\u2019m here to show you a few basics about
+      life in the valley!"
     responses:
-    - responseText: How do I select and plant seeds?
+    - responseText: How do I get to the stuff I've collected?
       nextNode:
-        dialogueText: "For right now, just head over to that box near the farm and
-          pick them up. Then head over to your plot, press \u201C1\u201D and click!"
-        responses:
-        - responseText: Sounds simple!
-          nextNode:
-            dialogueText: Yeah not too bad :3
-            responses: []
+        dialogueText: Press "I" to open your backpack and see your current inventory
+        responses: []
     - responseText: What will plants do for me?
       nextNode:
         dialogueText: Health benefits! Well besides the obvious mental health boost.

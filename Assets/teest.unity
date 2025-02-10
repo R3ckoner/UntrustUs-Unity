@@ -8327,6 +8327,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1753233041}
     - target: {fileID: 6465250344420855855, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
+      propertyPath: sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465250344420855855, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
       propertyPath: CameraPosition
       value: 
       objectReference: {fileID: 274869847}
@@ -27077,7 +27081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64413ec2bc466a84cb740a2e10e217fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: farm
+  sceneToLoad: house
 --- !u!1 &1961415708
 GameObject:
   m_ObjectHideFlags: 0
