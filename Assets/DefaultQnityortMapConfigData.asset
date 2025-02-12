@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a50ca01e59742c182c546c79e3c3ef3, type: 3}
+  m_Name: DefaultQnityortMapConfigData
+  m_EditorClassIdentifier: 
+  inverseScale: 24
+  generateLightMapUV: 0
+  defaultBaseMaterial: {fileID: 2100000, guid: 6734b60aa8efd433695e2063320b53a2, type: 2}
+  textureFolder: Assets/Textures/
+  materialFolder: Assets/Materials/
+  clipTexture: clip
+  skipTexture: skip
+  skyTexture: sky1
+  defaultSolidObject: {fileID: 6748744249050184235, guid: bbc0f70176c4e48f6a1beabe3d86383c, type: 3}
+  defaultClipObject: {fileID: 6748744249050184235, guid: f0264e404de784e73beb8f1324ed2c23, type: 3}
+  defaultTriggerObject: {fileID: 6748744249050184235, guid: 4e85cfa90079b46d9b89abf90f8bd885, type: 3}
+  pointEntities: []
+  solidEntities: []

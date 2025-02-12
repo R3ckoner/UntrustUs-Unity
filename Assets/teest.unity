@@ -778,7 +778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2850083898d49998625a67796462bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWeaponPickup: 1
   weaponIndex: 2
+  ammoAmount: 30
   normalFaceImage: {fileID: 0}
   happyFaceImage: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: dc3ca5d1d5821eb46a46144f5f4345ff, type: 3}
@@ -5917,7 +5919,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2850083898d49998625a67796462bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWeaponPickup: 1
   weaponIndex: 1
+  ammoAmount: 30
   normalFaceImage: {fileID: 0}
   happyFaceImage: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: dc3ca5d1d5821eb46a46144f5f4345ff, type: 3}
@@ -7185,6 +7189,30 @@ PrefabInstance:
       propertyPath: jumpCooldown
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: defaultVolume
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: defaultFootsteps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 61fb3706ed68ef549b4f38c94b4bbe18, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 9dfbd754827a3c443b19c11b8f3e4220, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: eb52a5244b103524ca369ef76d5e99be, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c3d2f4b12573fa4bad041a05a04bb39, type: 3}
     - target: {fileID: 6749295364170008407, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
       propertyPath: m_Drag
       value: 0
@@ -10129,7 +10157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2850083898d49998625a67796462bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWeaponPickup: 1
   weaponIndex: 0
+  ammoAmount: 30
   normalFaceImage: {fileID: 0}
   happyFaceImage: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: dc3ca5d1d5821eb46a46144f5f4345ff, type: 3}

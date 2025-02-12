@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bec6843bc941be956c41043c136f06, type: 3}
+  m_Name: QnityProjectSettingsData
+  m_EditorClassIdentifier: 
+  defaultQnityMapConfigData: {fileID: 11400000, guid: 59d9bfec8ad3d1d4085bc2de70143b84, type: 2}

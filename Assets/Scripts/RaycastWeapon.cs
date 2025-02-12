@@ -176,16 +176,29 @@ public class RaycastWeapon : MonoBehaviour
 
     private void ApplyRecoil()
     {
+        // Apply recoil after firing
         currentRecoilPosition += recoilKickback;
         currentRecoilRotation *= Quaternion.Euler(recoilRotation);
     }
 
     private void ResetRecoil()
     {
+        // Smoothly return weapon to original position after recoil
         currentRecoilPosition = Vector3.SmoothDamp(currentRecoilPosition, Vector3.zero, ref recoilPositionVelocity, recoilSmoothTime);
         currentRecoilRotation = Quaternion.Slerp(currentRecoilRotation, Quaternion.identity, Time.deltaTime * recoilResetSpeed);
 
-        weaponTransform.localPosition = Vector3.Lerp(weaponTransform.localPosition, originalPosition + currentRecoilPosition, Time.deltaTime * recoilResetSpeed);
-        weaponTransform.localRotation = Quaternion.Slerp(weaponTransform.localRotation, originalRotation * currentRecoilRotation, Time.deltaTime * recoilResetSpeed);
+        // Apply recoil movement *only* if not reloading
+        if (!isReloading)
+        {
+            weaponTransform.localPosition = Vector3.Lerp(weaponTransform.localPosition, originalPosition + currentRecoilPosition, Time.deltaTime * recoilResetSpeed);
+            weaponTransform.localRotation = Quaternion.Slerp(weaponTransform.localRotation, originalRotation * currentRecoilRotation, Time.deltaTime * recoilResetSpeed);
+        }
+    }
+
+    // Method to add ammo to the weapon
+    public void AddAmmo(int amount)
+    {
+        reserveAmmo += amount; // Adds ammo to the reserve
+        UpdateAmmoUI(); // Updates the UI to show new ammo
     }
 }

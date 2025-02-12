@@ -688,6 +688,26 @@ PrefabInstance:
       propertyPath: jumpCooldown
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: defaultFootsteps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c4547d40d53c9549abe2ed8b923efc3, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7a1cb930a48bbe144873a3c4db8ae43e, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 70ad4082bfb9f444aa1448061f80fd97, type: 3}
+    - target: {fileID: 5215808913792357973, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      propertyPath: 'defaultFootsteps.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: af7998bc07bf1ac4dbb1e67935b87ed9, type: 3}
     - target: {fileID: 5286703714449146841, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.765
@@ -1135,43 +1155,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297859496}
   m_CullTransparentMesh: 1
---- !u!84 &321916432
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 3440
-  m_Height: 1440
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &364740838 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8175563724800530547, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
@@ -4166,6 +4149,43 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7922998549121252559, guid: 2b88b8e0e4e9f8e45a4175664181dcb4, type: 3}
+--- !u!84 &1145654615
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 3440
+  m_Height: 1440
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1159910478
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,7 +4791,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 321916432}
+  m_Texture: {fileID: 1145654615}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7295,7 +7315,7 @@ PrefabInstance:
     - target: {fileID: 1061851635606641612, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 321916432}
+      objectReference: {fileID: 1145654615}
     - target: {fileID: 1061851635606641612, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
       propertyPath: near clip plane
       value: 0.01

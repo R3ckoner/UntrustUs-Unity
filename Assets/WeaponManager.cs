@@ -9,7 +9,7 @@ public class WeaponManager : MonoBehaviour
     private void Start()
     {
         weaponPickedUp = new bool[weapons.Length];
-        
+
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i].SetActive(false); // Disable all weapons at the start
@@ -52,6 +52,28 @@ public class WeaponManager : MonoBehaviour
         else
         {
             Debug.LogError("Invalid weapon index.");
+        }
+    }
+
+    public bool HasWeapon(int weaponIndex)
+    {
+        return weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex];
+    }
+
+    public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
+    {
+        if (HasWeapon(weaponIndex))
+        {
+            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+            if (weapon != null)
+            {
+                weapon.AddAmmo(ammoAmount);
+                Debug.Log($"Added {ammoAmount} ammo to {weapons[weaponIndex].name}.");
+            }
+        }
+        else
+        {
+            Debug.Log($"Cannot add ammo. Weapon {weaponIndex + 1} has not been picked up.");
         }
     }
 

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.qformats.qnity": {
+      "version": "https://github.com/QFormatPlugins/QNity.git?path=/com.qformats.qnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "18456641ec5a248f3e04db1c82b18dc4eb8d6ac6"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
