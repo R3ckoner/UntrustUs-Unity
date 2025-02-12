@@ -4,56 +4,43 @@ using System.Collections;
 public class DoorController : MonoBehaviour
 {
     [Header("Door Settings")]
-    public float openAngle = 90f; // The angle the door should open to
-    public float speed = 2f; // Speed of the door opening/closing
-    public KeyCode interactKey = KeyCode.E; // Key to open/close the door
-
-    [Header("Interaction Settings")]
-    public Collider interactionTrigger; // Assign a BoxCollider for door interaction
+    public float openAngle = 90f;
+    public float speed = 2f;
+    public KeyCode interactKey = KeyCode.E;
 
     [Header("Key Lock Settings")]
-    public bool requiresKey = false; // Toggle for Doom-style key lock
-    public GameObject keyObject; // Assign a key item GameObject
+    public bool requiresKey = false;
+    private bool keyCollected = false;
 
     [Header("Audio Settings")]
-    public AudioSource audioSource; // Reference to the AudioSource
-    public AudioClip openSound; // Sound when door opens
-    public AudioClip closeSound; // Sound when door closes
-    public AudioClip pickupSound; // Sound when picking up the key
-    public AudioClip lockedSound; // Sound when trying to open a locked door
+    public AudioSource audioSource;
+    public AudioClip openSound, closeSound, lockedSound;
 
-    private Quaternion closedRotation;
-    private Quaternion openRotation;
-    private bool isOpen = false;
-    private bool isAnimating = false;
-    private bool playerInRange = false;
-    private bool keyCollected = false; // Tracks if the player has picked up the key
+    private Quaternion closedRotation, openRotation;
+    private bool isOpen = false, isAnimating = false, playerInRange = false;
 
     void Start()
     {
         closedRotation = transform.rotation;
         openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, openAngle, 0));
-
-        // If the keyObject is null, consider the door as unlocked
-        if (keyObject == null)
-        {
-            keyCollected = true;
-        }
+        Debug.Log($"🚪 Door '{gameObject.name}' initialized. Requires Key: {requiresKey}, Key Collected: {keyCollected}");
     }
 
     void Update()
     {
         if (playerInRange && Input.GetKeyDown(interactKey) && !isAnimating)
         {
-            if (!requiresKey || keyCollected) // If key is collected or no key is required
+            if (!requiresKey || keyCollected)
             {
                 StartCoroutine(RotateDoor(isOpen ? closedRotation : openRotation));
                 PlaySound(isOpen ? closeSound : openSound);
                 isOpen = !isOpen;
+                Debug.Log($"🚪 Door '{gameObject.name}' {(isOpen ? "Opened" : "Closed")}.");
             }
             else
             {
-                PlaySound(lockedSound); // Play locked door sound if key is missing
+                Debug.Log("❌ Door is locked! Find the key.");
+                PlaySound(lockedSound);
             }
         }
     }
@@ -86,13 +73,8 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log($"👤 Player entered door '{gameObject.name}' interaction zone.");
             playerInRange = true;
-        }
-
-        // Check if the player collides with the key object
-        if (requiresKey && keyObject != null && other.gameObject == keyObject)
-        {
-            PickUpKey();
         }
     }
 
@@ -100,21 +82,14 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log($"👤 Player left door '{gameObject.name}' interaction zone.");
             playerInRange = false;
         }
     }
 
-    private void PickUpKey()
+    public void UnlockDoor()
     {
         keyCollected = true;
-
-        // Play pickup sound
-        PlaySound(pickupSound);
-
-        // Destroy key object after collection
-        if (keyObject != null)
-        {
-            Destroy(keyObject);
-        }
+        Debug.Log($"🔑 Key collected! The door '{gameObject.name}' is now unlocked.");
     }
 }
