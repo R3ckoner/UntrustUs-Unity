@@ -100,20 +100,8 @@ public class RaycastWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
             Debug.Log($"Hit: {hit.collider.name}");
-
-            // Check if the hit object is a Turret
             var turret = hit.collider.GetComponent<TurretController>();
-            if (turret != null)
-            {
-                turret.TakeDamage((int)damage);
-            }
-
-            // Check if the hit object is an Enemy
-            var enemy = hit.collider.GetComponent<EnemyFollow>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage((int)damage);  // Apply damage to the enemy
-            }
+            turret?.TakeDamage((int)damage);
         }
         else
         {
@@ -208,9 +196,17 @@ public class RaycastWeapon : MonoBehaviour
     }
 
     // Method to add ammo to the weapon
-    public void AddAmmo(int amount)
+public void AddAmmo(int amount)
+{
+    reserveAmmo += amount; // Adds ammo to the reserve
+
+    // Only update UI if this weapon is currently equipped
+    WeaponManager weaponManager = FindObjectOfType<WeaponManager>();
+    if (weaponManager != null && weaponManager.currentWeaponIndex >= 0 &&
+        weaponManager.weapons[weaponManager.currentWeaponIndex] == gameObject)
     {
-        reserveAmmo += amount; // Adds ammo to the reserve
-        UpdateAmmoUI(); // Updates the UI to show new ammo
+        UpdateAmmoUI(); 
     }
+}
+
 }

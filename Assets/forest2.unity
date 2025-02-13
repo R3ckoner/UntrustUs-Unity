@@ -20768,7 +20768,7 @@ MonoBehaviour:
   player: {fileID: 1626439702}
   moveSpeed: 20
   followDistance: 111
-  stopDistance: 0.025
+  stopDistance: 1
   triggerSound: {fileID: 8300000, guid: a7cd79234bf12f14188f1a904cdb2e6b, type: 3}
   maxHealth: 400
 --- !u!95 &851472646

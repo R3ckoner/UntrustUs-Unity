@@ -4,7 +4,8 @@ public class WeaponManager : MonoBehaviour
 {
     public GameObject[] weapons; // Array of all weapons
     private bool[] weaponPickedUp; // Tracks if a weapon is picked up
-    private int currentWeaponIndex = -1;
+    public int currentWeaponIndex { get; private set; }
+
 
     private void Start()
     {
@@ -78,7 +79,7 @@ public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
             // Only update UI if the weapon is currently equipped
             if (weaponIndex == currentWeaponIndex)
             {
-                weapon.UpdateAmmoUI(); // Update ammo UI for the equipped weapon
+                weapon.UpdateAmmoUI();
             }
         }
     }
