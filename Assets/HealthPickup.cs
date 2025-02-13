@@ -4,6 +4,7 @@ public class HealthPickup : MonoBehaviour
 {
     [Header("Health Settings")]
     public int healthAmount = 25; // Amount of health restored upon pickup
+    public int maxHealth = 100;   // Maximum health value (used to check if the player can pick up)
 
     [Header("Audio Settings")]
     public AudioClip pickupSound; // Sound to play when health is picked up
@@ -28,21 +29,31 @@ public class HealthPickup : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.Heal(healthAmount); // Heal the player
-
-                // Play pickup sound if available
-                if (pickupSound != null)
+                // Check if the player's current health is less than maxHealth
+                if (playerHealth.CurrentHealth < maxHealth)
                 {
-                    audioSource.PlayOneShot(pickupSound);
-                }
-                UIManager uiManager = FindObjectOfType<UIManager>();
-                if (uiManager != null)
-                {
-                    uiManager.ShowHappyFace(1f);
-                }
+                    int healthToRestore = Mathf.Min(healthAmount, maxHealth - playerHealth.CurrentHealth); // Ensure health doesn't exceed maxHealth
+                    playerHealth.Heal(healthToRestore); // Heal the player
 
-                // Destroy the health pickup immediately
-                Destroy(gameObject, pickupSound != null ? pickupSound.length : 0f);
+                    // Play pickup sound if available
+                    if (pickupSound != null)
+                    {
+                        audioSource.PlayOneShot(pickupSound);
+                    }
+
+                    UIManager uiManager = FindObjectOfType<UIManager>();
+                    if (uiManager != null)
+                    {
+                        uiManager.ShowHappyFace(1f);
+                    }
+
+                    // Destroy the health pickup immediately
+                    Destroy(gameObject, pickupSound != null ? pickupSound.length : 0f);
+                }
+                else
+                {
+                    Debug.Log("Player health is already full. Cannot pick up health.");
+                }
             }
         }
     }

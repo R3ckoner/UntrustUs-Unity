@@ -3,7 +3,10 @@ using UnityEngine;
 public class KeyPickup : MonoBehaviour
 {
     [Header("Door To Unlock")]
-    public DoorController doorToUnlock; // Assign the specific door in the Inspector
+    public DoorController doorToUnlock; // Assign the door in the Inspector
+
+    [Header("Enemies to Activate")]
+    public GameObject[] enemiesToActivate; // Assign enemies that should become active
 
     [Header("Audio Settings")]
     public AudioClip pickupSound;
@@ -34,12 +37,27 @@ public class KeyPickup : MonoBehaviour
                 Debug.LogError("❌ No door assigned to this key!");
             }
 
-            if (pickupSound != null)
+            // Activate enemies
+            if (enemiesToActivate != null && enemiesToActivate.Length > 0)
             {
-                audioSource.PlayOneShot(pickupSound);
+                foreach (GameObject enemy in enemiesToActivate)
+                {
+                    if (enemy != null)
+                    {
+                        enemy.SetActive(true);
+                        Debug.Log($"👹 Enemy '{enemy.name}' activated!");
+                    }
+                }
             }
 
-            // Destroy key immediately or after sound plays
+            // Play pickup sound
+            audioSource.PlayOneShot(pickupSound);
+
+            // Instantly hide key (disable mesh + collider)
+            GetComponent<Renderer>().enabled = false; // Hide key
+            GetComponent<Collider>().enabled = false; // Disable trigger to prevent re-triggering
+
+            // Destroy after sound finishes (or immediately if no sound)
             Destroy(gameObject, pickupSound != null ? pickupSound.length : 0f);
         }
         else

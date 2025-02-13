@@ -31,41 +31,42 @@ public class WeaponPickup : MonoBehaviour
         audioSource.playOnAwake = false; // Prevent automatic playback
     }
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Player"))
     {
-        if (other.CompareTag("Player"))
+        WeaponManager weaponManager = other.GetComponent<WeaponManager>();
+        if (weaponManager != null && !weaponManager.IsCurrentWeaponReloading())
         {
-            WeaponManager weaponManager = other.GetComponent<WeaponManager>();
-            if (weaponManager != null && !weaponManager.IsCurrentWeaponReloading())
+            if (isWeaponPickup)
             {
-                if (isWeaponPickup)
+                // Picking up a new weapon
+                weaponManager.PickupWeapon(weaponIndex);
+                Debug.Log($"Picked up Weapon {weaponIndex + 1}!");
+                ProcessPickup();
+            }
+            else
+            {
+                // Check if the player already has the weapon before allowing ammo pickup
+                if (weaponManager.HasWeapon(weaponIndex))
                 {
-                    // Picking up a new weapon
-                    weaponManager.PickupWeapon(weaponIndex);
-                    Debug.Log($"Picked up Weapon {weaponIndex + 1}!");
+                    weaponManager.AddAmmoToWeapon(weaponIndex, ammoAmount);
+                    Debug.Log($"Picked up {ammoAmount} ammo for Weapon {weaponIndex + 1}!");
                     ProcessPickup();
                 }
                 else
                 {
-                    // Check if the player already has the weapon before allowing ammo pickup
-                    if (weaponManager.HasWeapon(weaponIndex))
-                    {
-                        weaponManager.AddAmmoToWeapon(weaponIndex, ammoAmount);
-                        Debug.Log($"Picked up {ammoAmount} ammo for Weapon {weaponIndex + 1}!");
-                        ProcessPickup();
-                    }
-                    else
-                    {
-                        Debug.Log($"Cannot pick up ammo! You don't have Weapon {weaponIndex + 1} yet.");
-                    }
+                    Debug.Log($"Cannot pick up ammo! You don't have Weapon {weaponIndex + 1} yet.");
                 }
             }
-            else
-            {
-                Debug.Log("Cannot pick up while reloading.");
-            }
+        }
+        else
+        {
+            Debug.Log("Cannot pick up while reloading.");
         }
     }
+}
+
 
     private void ProcessPickup()
     {

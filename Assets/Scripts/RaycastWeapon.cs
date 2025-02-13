@@ -100,8 +100,20 @@ public class RaycastWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
             Debug.Log($"Hit: {hit.collider.name}");
+
+            // Check if the hit object is a Turret
             var turret = hit.collider.GetComponent<TurretController>();
-            turret?.TakeDamage((int)damage);
+            if (turret != null)
+            {
+                turret.TakeDamage((int)damage);
+            }
+
+            // Check if the hit object is an Enemy
+            var enemy = hit.collider.GetComponent<EnemyFollow>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage((int)damage);  // Apply damage to the enemy
+            }
         }
         else
         {
@@ -152,7 +164,7 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    private void UpdateAmmoUI()
+    public void UpdateAmmoUI()
     {
         magText.text = currentAmmo.ToString();
         bagText.text = reserveAmmo.ToString();

@@ -4,9 +4,12 @@ using System.Collections;
 public class DoorController : MonoBehaviour
 {
     [Header("Door Settings")]
-    public float openAngle = 90f;
+    public float openAngle = 90f; // Default angle to open the door
     public float speed = 2f;
     public KeyCode interactKey = KeyCode.E;
+
+    [Header("Opening Direction")]
+    public bool openToRight = true; // True = Open clockwise (right), False = Open counterclockwise (left)
 
     [Header("Key Lock Settings")]
     public bool requiresKey = false;
@@ -22,8 +25,12 @@ public class DoorController : MonoBehaviour
     void Start()
     {
         closedRotation = transform.rotation;
-        openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, openAngle, 0));
-        Debug.Log($"🚪 Door '{gameObject.name}' initialized. Requires Key: {requiresKey}, Key Collected: {keyCollected}");
+
+        // Determine opening direction based on 'openToRight' setting
+        float angle = openToRight ? openAngle : -openAngle;
+        openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, angle, 0));
+
+        Debug.Log($"🚪 Door '{gameObject.name}' initialized. Opens to {(openToRight ? "Right (Clockwise)" : "Left (Counterclockwise)")}. Requires Key: {requiresKey}, Key Collected: {keyCollected}");
     }
 
     void Update()

@@ -24,22 +24,27 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(int weaponIndex)
+public void EquipWeapon(int weaponIndex)
+{
+    if (weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex])
     {
-        if (weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex])
+        if (currentWeaponIndex >= 0)
         {
-            if (currentWeaponIndex >= 0)
-            {
-                weapons[currentWeaponIndex].SetActive(false);
-            }
+            weapons[currentWeaponIndex].SetActive(false);
+        }
 
-            weapons[weaponIndex].SetActive(true);
-            currentWeaponIndex = weaponIndex;
+        weapons[weaponIndex].SetActive(true);
+        currentWeaponIndex = weaponIndex;
 
-            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
-            weapon?.UpdateWeaponNameUI();
+        var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+        if (weapon != null)
+        {
+            weapon.UpdateWeaponNameUI();
+            weapon.UpdateAmmoUI(); // Force UI update when switching weapons
         }
     }
+}
+
 
     public void PickupWeapon(int weaponIndex)
     {
@@ -60,22 +65,30 @@ public class WeaponManager : MonoBehaviour
         return weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex];
     }
 
-    public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
+public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
+{
+    if (HasWeapon(weaponIndex))
     {
-        if (HasWeapon(weaponIndex))
+        var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+        if (weapon != null)
         {
-            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
-            if (weapon != null)
+            weapon.AddAmmo(ammoAmount);
+            Debug.Log($"Added {ammoAmount} ammo to {weapons[weaponIndex].name}.");
+
+            // Only update UI if the weapon is currently equipped
+            if (weaponIndex == currentWeaponIndex)
             {
-                weapon.AddAmmo(ammoAmount);
-                Debug.Log($"Added {ammoAmount} ammo to {weapons[weaponIndex].name}.");
+                weapon.UpdateAmmoUI(); // Update ammo UI for the equipped weapon
             }
         }
-        else
-        {
-            Debug.Log($"Cannot add ammo. Weapon {weaponIndex + 1} has not been picked up.");
-        }
     }
+    else
+    {
+        Debug.Log($"Cannot add ammo. Weapon {weaponIndex + 1} has not been picked up.");
+    }
+}
+
+
 
     private void HandleWeaponSwitching()
     {

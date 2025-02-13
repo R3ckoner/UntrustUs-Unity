@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth = 100; // Maximum health
     private int currentHealth;
-
+    
     [Header("UI Elements")]
     public TextMeshProUGUI healthText; // Reference to TMP health display
     public TextMeshProUGUI moneyText; // Reference to TMP money display
@@ -18,6 +18,9 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Scene Settings")]
     public string gameplaySceneName = "GameplayScene"; // Set this to your gameplay scene name
+
+    [Header("Debug Settings")]
+    public bool isGodMode = false; // God Mode toggle
 
     // Static variables to persist health and money across scenes
     public static int savedHealth = -1; // Initialize to -1 to detect first run
@@ -38,8 +41,24 @@ public class PlayerHealth : MonoBehaviour
         UpdateMoneyUI();
     }
 
+    void Update()
+    {
+        // Toggle God Mode with F1
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            isGodMode = !isGodMode;
+            Debug.Log($"🛡️ God Mode: {(isGodMode ? "Enabled" : "Disabled")}");
+        }
+    }
+
     public void TakeDamage(int damage)
     {
+        if (isGodMode)
+        {
+            Debug.Log("🛡️ God Mode Active: No Damage Taken!");
+            return;
+        }
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health stays within bounds
 
@@ -119,5 +138,11 @@ public class PlayerHealth : MonoBehaviour
         // Save current health and money when switching scenes
         savedHealth = currentHealth;
         savedTotalMoney = totalMoney;
+    }
+
+    // Add this public property to allow access to currentHealth
+    public int CurrentHealth
+    {
+        get { return currentHealth; }
     }
 }
