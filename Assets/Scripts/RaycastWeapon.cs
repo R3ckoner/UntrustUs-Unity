@@ -80,38 +80,50 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    private void Fire()
+private void Fire()
+{
+    if (currentAmmo <= 0)
     {
-        if (currentAmmo <= 0)
-        {
-            Debug.Log("Out of ammo!");
-            return;
-        }
-
-        currentAmmo--;
-        nextFireTime = Time.time + fireRate;
-
-        fireSound?.Play();
-
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null) return;
-
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, range))
-        {
-            Debug.Log($"Hit: {hit.collider.name}");
-            var turret = hit.collider.GetComponent<TurretController>();
-            turret?.TakeDamage((int)damage);
-        }
-        else
-        {
-            Debug.Log("Missed!");
-        }
-
-        ShowMuzzleFlash();
-        ApplyRecoil();
-        UpdateAmmoUI();
+        Debug.Log("Out of ammo!");
+        return;
     }
+
+    currentAmmo--;
+    nextFireTime = Time.time + fireRate;
+
+    fireSound?.Play();
+
+    Camera mainCamera = Camera.main;
+    if (mainCamera == null) return;
+
+    Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    if (Physics.Raycast(ray, out RaycastHit hit, range))
+    {
+        Debug.Log($"Hit: {hit.collider.name}");
+
+        // Check if the hit object has a TurretController and apply damage
+        var turret = hit.collider.GetComponent<TurretController>();
+        if (turret != null)
+        {
+            turret.TakeDamage((int)damage);
+        }
+
+        // Check if the hit object has an EnemyFollow and apply damage
+        var enemy = hit.collider.GetComponent<EnemyFollow>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage((int)damage);  // Apply damage to the enemy
+        }
+    }
+    else
+    {
+        Debug.Log("Missed!");
+    }
+
+    ShowMuzzleFlash();
+    ApplyRecoil();
+    UpdateAmmoUI();
+}
 
     private void HandleReloading()
     {

@@ -3,71 +3,75 @@ using UnityEngine;
 public class EnemyFollow : MonoBehaviour
 {
     public Transform player;  // Reference to the player
-    public float moveSpeed = 3f;  // Movement speed of the enemy
-    public float followDistance = 5f;  // Distance at which the enemy starts following
-    public float stopDistance = 0.025f;  // Distance (in meters) at which the enemy stops moving (about 1 inch)
-    public AudioClip triggerSound;  // The sound to play when triggered
-    private AudioSource audioSource;  // The AudioSource component
+    public float moveSpeed = 3f;
+    public float followDistance = 5f;
+    public float stopDistance = 0.025f;
+    public AudioClip triggerSound;
+    private AudioSource audioSource;
 
     [Header("Health Settings")]
-    public int maxHealth = 100; // Maximum health of the enemy
-    private int currentHealth; // Current health of the enemy
+    public int maxHealth = 100;
+    private int currentHealth;
+
+    [Header("Rewards")]
+    public int rewardAmount = 50; // Amount of money rewarded on enemy kill
+
+    [Header("Gib Settings")]
+    public GameObject gibPrefab;
+
+    private bool isDead = false;
 
     private void Start()
     {
-        // Get the AudioSource component attached to the enemy
         audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
     }
 
     private void Update()
     {
-        // Check distance between enemy and player
+        if (isDead) return;
+
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // If player is within the follow distance
         if (distance <= followDistance)
         {
-            // Play sound if it's not already playing
             if (!audioSource.isPlaying && triggerSound != null)
             {
                 audioSource.PlayOneShot(triggerSound);
             }
 
-            // If the enemy is further than the stop distance, continue moving toward the player
             if (distance > stopDistance)
             {
-                // Make the enemy follow the player, but only in the X and Z axes
                 Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             }
 
-            // Make the enemy face the player
             Vector3 direction = player.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }
 
-    // Method to deal damage to the player when the enemy collides with them
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             audioSource.PlayOneShot(triggerSound);
-            var playerHealth = other.GetComponent<PlayerHealth>(); // Assuming the player has a PlayerHealth script
+            var playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(50); // Deal 10 damage (or adjust as needed)
+                playerHealth.TakeDamage(50);
             }
-            Destroy(gameObject); // Destroy the enemy
+            Die();
         }
     }
 
-    // Method to take damage from the player's weapons
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
+        Debug.Log($"Enemy took {damage} damage! Current health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -75,10 +79,31 @@ public class EnemyFollow : MonoBehaviour
         }
     }
 
-    // Method to handle enemy death
     private void Die()
     {
+        if (gibPrefab != null)
+        {
+            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
+            Destroy(spawnedGibs, 30f);
+        }
+        
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log("Enemy destroyed!");
-        Destroy(gameObject); // Destroy the enemy
+
+        var playerHealth = FindObjectOfType<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.AddMoney(rewardAmount);
+        }
+
+      
+
+        GetComponent<Collider>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
+        moveSpeed = 0;
+
+        Destroy(gameObject, 0);
     }
 }
