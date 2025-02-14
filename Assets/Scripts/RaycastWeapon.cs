@@ -34,6 +34,11 @@ public class RaycastWeapon : MonoBehaviour
     public Vector3 reloadPositionOffset = new Vector3(0, -0.5f, 0.3f);
     public Vector3 reloadRotationOffset = new Vector3(30f, 0f, 0f);
     public float reloadSmoothTime = 0.2f;
+    [Header("Custom Reload Animation")]
+    public bool useCustomReload = false; // Toggle in Inspector
+    public Animator weaponAnimator; // Animator for custom reload
+    public string reloadAnimationName = "Reload"; // Default animation name
+
 
     [Header("Audio")]
     public AudioSource fireSound;
@@ -61,6 +66,7 @@ public class RaycastWeapon : MonoBehaviour
         originalRotation = weaponTransform.localRotation;
         UpdateAmmoUI();
         UpdateWeaponNameUI();
+        weaponAnimator.enabled = false;
     }
 
     private void Update()
@@ -101,18 +107,18 @@ private void Fire()
     {
         Debug.Log($"Hit: {hit.collider.name}");
 
-        // Check if the hit object has a TurretController and apply damage
+        // ✅ Apply damage to turrets
         var turret = hit.collider.GetComponent<TurretController>();
         if (turret != null)
         {
             turret.TakeDamage((int)damage);
         }
 
-        // Check if the hit object has an EnemyFollow and apply damage
+        // ✅ Apply damage to enemies
         var enemy = hit.collider.GetComponent<EnemyFollow>();
         if (enemy != null)
         {
-            enemy.TakeDamage((int)damage);  // Apply damage to the enemy
+            enemy.TakeDamage((int)damage);
         }
     }
     else
@@ -125,6 +131,7 @@ private void Fire()
     UpdateAmmoUI();
 }
 
+
     private void HandleReloading()
     {
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < magazineSize && reserveAmmo > 0)
@@ -133,24 +140,48 @@ private void Fire()
         }
     }
 
-    private IEnumerator Reload()
+private IEnumerator Reload()
+{
+    if (isReloading) yield break;
+
+    isReloading = true;
+    reloadSound?.Play();
+
+    if (weaponAnimator != null)
     {
-        isReloading = true;
-        reloadSound?.Play();
-
-        Vector3 targetPosition = originalPosition + reloadPositionOffset;
-        Quaternion targetRotation = originalRotation * Quaternion.Euler(reloadRotationOffset);
-
-        yield return MoveWeapon(targetPosition, targetRotation, reloadTime * 0.5f);
-        yield return new WaitForSeconds(reloadTime * 0.5f);
-
-        int ammoToReload = Mathf.Min(magazineSize - currentAmmo, reserveAmmo);
-        currentAmmo += ammoToReload;
-        reserveAmmo -= ammoToReload;
-
-        isReloading = false;
-        UpdateAmmoUI();
+        weaponAnimator.enabled = true;  // ✅ Enable the Animator to play the animation
+        weaponAnimator.Play("Reload"); // ✅ Play the animation manually
+        yield return new WaitForSeconds(GetAnimationLength("Reload")); // Wait for animation to finish
+        weaponAnimator.enabled = false; // ❌ Disable Animator to reset position
     }
+    else
+    {
+        yield return new WaitForSeconds(reloadTime);
+    }
+
+    int ammoToReload = Mathf.Min(magazineSize - currentAmmo, reserveAmmo);
+    currentAmmo += ammoToReload;
+    reserveAmmo -= ammoToReload;
+
+    isReloading = false;
+    UpdateAmmoUI();
+}
+
+private float GetAnimationLength(string animationName)
+{
+    if (weaponAnimator == null) return reloadTime; // Fallback to default reload time
+
+    AnimationClip[] clips = weaponAnimator.runtimeAnimatorController.animationClips;
+    foreach (AnimationClip clip in clips)
+    {
+        if (clip.name == animationName)
+        {
+            return clip.length;
+        }
+    }
+    return reloadTime; // If animation not found, use default reload time
+}
+
 
     private IEnumerator MoveWeapon(Vector3 targetPosition, Quaternion targetRotation, float duration)
     {
