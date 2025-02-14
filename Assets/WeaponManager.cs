@@ -127,6 +127,7 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponPickedUp[0]) EquipWeapon(0);
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponPickedUp[1]) EquipWeapon(1);
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponPickedUp[2]) EquipWeapon(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4) && weaponPickedUp[3]) EquipWeapon(3);
     }
 
     public bool IsCurrentWeaponReloading()

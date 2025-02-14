@@ -25,7 +25,16 @@ public class EnemyFollow : MonoBehaviour
     public Vector3 gibSize = new Vector3(1f, 1f, 1f);
 
     private bool isDead = false;
-    private AudioSource triggerAudioSource; // This will automatically reference the AudioSource attached to the enemy
+    private AudioSource triggerAudioSource;
+    private float lastTriggerSoundTime = 0f;
+    public float triggerSoundCooldown = 10f; // Adjust cooldown as needed
+
+    private bool hasPlayedTriggerSound = false;
+
+
+
+
+     // This will automatically reference the AudioSource attached to the enemy
 
     [Header("Player Damage Settings")]
     public int damageAmount = 50; // How much damage the enemy deals when it collides with the player
@@ -49,9 +58,11 @@ private void Update()
 
     if (distance <= followDistance)
     {
-        if (triggerSound != null && triggerAudioSource != null && !triggerAudioSource.isPlaying)
+        // Play sound only once when player enters follow range
+        if (!hasPlayedTriggerSound && triggerSound != null && triggerAudioSource != null)
         {
             triggerAudioSource.PlayOneShot(triggerSound);
+            hasPlayedTriggerSound = true; // Prevents repeated playing
         }
 
         if (distance > stopDistance)
@@ -60,7 +71,7 @@ private void Update()
             Vector3 direction = (targetPosition - transform.position).normalized;
 
             // Raycast in the movement direction to detect obstacles
-            if (!Physics.Raycast(transform.position, direction, 0.75f)) // Adjust ray distance as needed
+            if (!Physics.Raycast(transform.position, direction, 0.75f))
             {
                 transform.position += direction * moveSpeed * Time.deltaTime;
             }
@@ -71,7 +82,13 @@ private void Update()
         Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+    else
+    {
+        // Reset the flag if the player moves out of range
+        hasPlayedTriggerSound = false;
+    }
 }
+
 
     private void OnTriggerStay(Collider other)
     {
