@@ -7,11 +7,16 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth = 100; // Maximum health
     private int currentHealth;
-    
+
     [Header("UI Elements")]
     public TextMeshProUGUI healthText; // Reference to TMP health display
     public TextMeshProUGUI moneyText; // Reference to TMP money display
     public GameObject sadFaceImage; // Reference to the sad face GameObject
+
+    [Header("Damage Settings")]
+    public int damageThreshold = 35; // Damage threshold to trigger sound (can be set in Inspector)
+    public AudioClip damageSound; // Sound effect to play when damage exceeds threshold
+    private AudioSource audioSource; // Audio source for playing the damage sound
 
     [Header("Death Settings")]
     public float reloadDelay = 2f; // Delay before reloading the scene
@@ -39,6 +44,9 @@ public class PlayerHealth : MonoBehaviour
         // Update UI
         UpdateHealthUI();
         UpdateMoneyUI();
+
+        // Get the AudioSource component attached to the player
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -59,6 +67,13 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
+        // Check if damage exceeds threshold
+        if (damage > damageThreshold && damageSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
+
+        // Apply damage and clamp health
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health stays within bounds
 

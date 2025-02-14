@@ -2,29 +2,43 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public Transform player;  // Reference to the player
+    public Transform player;
     public float moveSpeed = 3f;
     public float followDistance = 5f;
     public float stopDistance = 0.025f;
+
+    [Header("Audio Settings")]
+    public AudioSource deathAudioSource; // Assign in Inspector for the death sound
     public AudioClip triggerSound;
-    private AudioSource audioSource;
+    public AudioClip deathSound;
+    [Range(0f, 1f)] public float deathSoundVolume = 1f;
 
     [Header("Health Settings")]
     public int maxHealth = 100;
     private int currentHealth;
 
     [Header("Rewards")]
-    public int rewardAmount = 50; // Amount of money rewarded on enemy kill
+    public int rewardAmount = 50;
 
     [Header("Gib Settings")]
     public GameObject gibPrefab;
+    public Vector3 gibSize = new Vector3(1f, 1f, 1f);
 
     private bool isDead = false;
+    private AudioSource triggerAudioSource; // This will automatically reference the AudioSource attached to the enemy
+
+    [Header("Player Damage Settings")]
+    public int damageAmount = 50; // How much damage the enemy deals when it collides with the player
+    public float damageInterval = 1f; // How frequently damage is dealt (in seconds)
+    private float lastDamageTime;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
+
+        // Get the AudioSource attached to the enemy
+        triggerAudioSource = GetComponent<AudioSource>();
+        lastDamageTime = Time.time;
     }
 
     private void Update()
@@ -35,9 +49,9 @@ public class EnemyFollow : MonoBehaviour
 
         if (distance <= followDistance)
         {
-            if (!audioSource.isPlaying && triggerSound != null)
+            if (triggerSound != null && triggerAudioSource != null && !triggerAudioSource.isPlaying)
             {
-                audioSource.PlayOneShot(triggerSound);
+                triggerAudioSource.PlayOneShot(triggerSound);
             }
 
             if (distance > stopDistance)
@@ -52,17 +66,20 @@ public class EnemyFollow : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (isDead) return;
+
+        // Check if the player is in range and deal damage
+        if (other.CompareTag("Player") && Time.time >= lastDamageTime + damageInterval)
         {
-            audioSource.PlayOneShot(triggerSound);
-            var playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            // Call the player's TakeDamage method
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             {
-                playerHealth.TakeDamage(50);
+                playerHealth.TakeDamage(damageAmount);
+              //  lastDamageTime = Time.time; // Reset the damage interval timer
+                Die();
             }
-            Die();
         }
     }
 
@@ -81,29 +98,33 @@ public class EnemyFollow : MonoBehaviour
 
     private void Die()
     {
-        if (gibPrefab != null)
-        {
-            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
-            Destroy(spawnedGibs, 30f);
-        }
-        
         if (isDead) return;
         isDead = true;
 
         Debug.Log("Enemy destroyed!");
 
-        var playerHealth = FindObjectOfType<PlayerHealth>();
-        if (playerHealth != null)
+        if (deathAudioSource != null && deathSound != null)
         {
-            playerHealth.AddMoney(rewardAmount);
+            deathAudioSource.PlayOneShot(deathSound, deathSoundVolume);
         }
 
-      
+        if (gibPrefab != null)
+        {
+            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
+            spawnedGibs.transform.localScale = gibSize;
+            Destroy(spawnedGibs, 60f);
+        }
 
+        // Disable physics and collider before rotating
         GetComponent<Collider>().enabled = false;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().isKinematic = true; // Prevent physics from interfering
+        }
+
         GetComponent<MeshRenderer>().enabled = false;
         moveSpeed = 0;
 
-        Destroy(gameObject, 0);
+        Destroy(gameObject, 0f);
     }
 }

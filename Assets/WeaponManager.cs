@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -6,6 +8,18 @@ public class WeaponManager : MonoBehaviour
     private bool[] weaponPickedUp; // Tracks if a weapon is picked up
     public int currentWeaponIndex { get; private set; }
 
+    [Header("God Mode Settings")]
+    public bool godModeEnabled = false; // Toggle in the inspector
+
+    [Header("God Mode UI")]
+    public TextMeshProUGUI godModeText;
+    public string godModeEnabledMessage = "God Mode Enabled"; // Custom message for enabling
+    public string godModeDisabledMessage = "God Mode Disabled"; // Custom message for disabling
+    public float fadeInTime = 1f;
+    public float fadeOutTime = 1f;
+    public float stayTime = 2f;
+
+    private CanvasGroup canvasGroup;
 
     private void Start()
     {
@@ -15,6 +29,16 @@ public class WeaponManager : MonoBehaviour
         {
             weapons[i].SetActive(false); // Disable all weapons at the start
         }
+
+        if (godModeText != null)
+        {
+            canvasGroup = godModeText.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = godModeText.gameObject.AddComponent<CanvasGroup>();
+            }
+            canvasGroup.alpha = 0f; // Start with text invisible
+        }
     }
 
     private void Update()
@@ -23,29 +47,39 @@ public class WeaponManager : MonoBehaviour
         {
             HandleWeaponSwitching();
         }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ToggleGodMode();
+        }
     }
 
-public void EquipWeapon(int weaponIndex)
-{
-    if (weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex])
+    public void EquipWeapon(int weaponIndex)
     {
-        if (currentWeaponIndex >= 0)
+        if (weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex])
         {
-            weapons[currentWeaponIndex].SetActive(false);
-        }
+            if (currentWeaponIndex >= 0)
+            {
+                weapons[currentWeaponIndex].SetActive(false);
+            }
 
-        weapons[weaponIndex].SetActive(true);
-        currentWeaponIndex = weaponIndex;
+            weapons[weaponIndex].SetActive(true);
+            currentWeaponIndex = weaponIndex;
 
-        var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
-        if (weapon != null)
-        {
-            weapon.UpdateWeaponNameUI();
-            weapon.UpdateAmmoUI(); // Force UI update when switching weapons
+            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+            if (weapon != null)
+            {
+                weapon.UpdateWeaponNameUI();
+                weapon.UpdateAmmoUI(); // Force UI update when switching weapons
+
+                if (godModeEnabled)
+                {
+                    weapon.reserveAmmo = 9999; // Set unlimited reserve ammo
+                    weapon.UpdateAmmoUI();
+                }
+            }
         }
     }
-}
-
 
     public void PickupWeapon(int weaponIndex)
     {
@@ -66,30 +100,27 @@ public void EquipWeapon(int weaponIndex)
         return weaponIndex >= 0 && weaponIndex < weapons.Length && weaponPickedUp[weaponIndex];
     }
 
-public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
-{
-    if (HasWeapon(weaponIndex))
+    public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
     {
-        var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
-        if (weapon != null)
+        if (HasWeapon(weaponIndex))
         {
-            weapon.AddAmmo(ammoAmount);
-            Debug.Log($"Added {ammoAmount} ammo to {weapons[weaponIndex].name}.");
-
-            // Only update UI if the weapon is currently equipped
-            if (weaponIndex == currentWeaponIndex)
+            var weapon = weapons[weaponIndex].GetComponent<RaycastWeapon>();
+            if (weapon != null)
             {
-                weapon.UpdateAmmoUI();
+                weapon.AddAmmo(ammoAmount);
+                Debug.Log($"Added {ammoAmount} ammo to {weapons[weaponIndex].name}.");
+
+                if (weaponIndex == currentWeaponIndex)
+                {
+                    weapon.UpdateAmmoUI();
+                }
             }
         }
+        else
+        {
+            Debug.Log($"Cannot add ammo. Weapon {weaponIndex + 1} has not been picked up.");
+        }
     }
-    else
-    {
-        Debug.Log($"Cannot add ammo. Weapon {weaponIndex + 1} has not been picked up.");
-    }
-}
-
-
 
     private void HandleWeaponSwitching()
     {
@@ -109,5 +140,90 @@ public void AddAmmoToWeapon(int weaponIndex, int ammoAmount)
             }
         }
         return false;
+    }
+
+    private void ToggleGodMode()
+    {
+        godModeEnabled = !godModeEnabled; // Toggle the state
+        Debug.Log(godModeEnabled ? "God Mode Activated!" : "God Mode Deactivated!");
+
+        if (godModeEnabled)
+        {
+            EnableGodMode();
+        }
+        else
+        {
+            DisableGodMode();
+        }
+
+        // Show the appropriate message
+        if (godModeText != null)
+        {
+            StartCoroutine(ShowGodModeText(godModeEnabled ? godModeEnabledMessage : godModeDisabledMessage));
+        }
+    }
+
+    private void EnableGodMode()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weaponPickedUp[i] = true; // Unlock all weapons
+        }
+
+        EquipWeapon(0); // Equip the first weapon by default
+
+        foreach (var weaponObj in weapons)
+        {
+            var weapon = weaponObj.GetComponent<RaycastWeapon>();
+            if (weapon != null)
+            {
+                weapon.reserveAmmo = 9999; // Unlimited ammo
+                weapon.UpdateAmmoUI();
+            }
+        }
+    }
+
+    private void DisableGodMode()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weaponPickedUp[i] = false; // Lock all weapons
+        }
+
+        if (currentWeaponIndex >= 0)
+        {
+            weapons[currentWeaponIndex].SetActive(false);
+        }
+        currentWeaponIndex = -1;
+
+        Debug.Log("God Mode Off: Weapons reset.");
+    }
+
+    private IEnumerator ShowGodModeText(string message)
+    {
+        godModeText.text = message; // Update message text
+
+        // Fade in
+        float timeElapsed = 0f;
+        while (timeElapsed < fadeInTime)
+        {
+            canvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeInTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        canvasGroup.alpha = 1f;
+
+        // Stay visible
+        yield return new WaitForSeconds(stayTime);
+
+        // Fade out
+        timeElapsed = 0f;
+        while (timeElapsed < fadeOutTime)
+        {
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / fadeOutTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        canvasGroup.alpha = 0f;
     }
 }
