@@ -25,6 +25,15 @@ public class KeyPickup : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+             // Play pickup sound
+            audioSource.PlayOneShot(pickupSound);
+
+            // Instantly hide key (disable mesh + collider)
+            GetComponent<Renderer>().enabled = false; // Hide key
+            GetComponent<Collider>().enabled = false; // Disable trigger to prevent re-triggering
+
+            // Destroy after sound finishes (or immediately if no sound)
+            Destroy(gameObject, pickupSound != null ? pickupSound.length : 0f);
             Debug.Log("✅ Player picked up the key!");
 
             if (doorToUnlock != null)
@@ -50,15 +59,6 @@ public class KeyPickup : MonoBehaviour
                 }
             }
 
-            // Play pickup sound
-            audioSource.PlayOneShot(pickupSound);
-
-            // Instantly hide key (disable mesh + collider)
-            GetComponent<Renderer>().enabled = false; // Hide key
-            GetComponent<Collider>().enabled = false; // Disable trigger to prevent re-triggering
-
-            // Destroy after sound finishes (or immediately if no sound)
-            Destroy(gameObject, pickupSound != null ? pickupSound.length : 0f);
         }
         else
         {

@@ -41,30 +41,37 @@ public class EnemyFollow : MonoBehaviour
         lastDamageTime = Time.time;
     }
 
-    private void Update()
+private void Update()
+{
+    if (isDead) return;
+
+    float distance = Vector3.Distance(transform.position, player.position);
+
+    if (distance <= followDistance)
     {
-        if (isDead) return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance <= followDistance)
+        if (triggerSound != null && triggerAudioSource != null && !triggerAudioSource.isPlaying)
         {
-            if (triggerSound != null && triggerAudioSource != null && !triggerAudioSource.isPlaying)
-            {
-                triggerAudioSource.PlayOneShot(triggerSound);
-            }
-
-            if (distance > stopDistance)
-            {
-                Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            }
-
-            Vector3 direction = player.position - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            triggerAudioSource.PlayOneShot(triggerSound);
         }
+
+        if (distance > stopDistance)
+        {
+            Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
+            Vector3 direction = (targetPosition - transform.position).normalized;
+
+            // Raycast in the movement direction to detect obstacles
+            if (!Physics.Raycast(transform.position, direction, 0.75f)) // Adjust ray distance as needed
+            {
+                transform.position += direction * moveSpeed * Time.deltaTime;
+            }
+        }
+
+        // Rotate towards player
+        Vector3 lookDirection = player.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+}
 
     private void OnTriggerStay(Collider other)
     {
