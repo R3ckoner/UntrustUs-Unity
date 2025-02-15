@@ -32,9 +32,9 @@ MonoBehaviour:
     m_path: Assets/FarmAfter.unity
   - m_enabled: 0
     m_path: Assets/house.unity
-  - m_enabled: 0
-    m_path: Assets/forest2.unity
   - m_enabled: 1
+    m_path: Assets/forest2.unity
+  - m_enabled: 0
     m_path: Assets/nikki.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -51,7 +51,7 @@ MonoBehaviour:
     - line: '|   useOnDemandResources: 0'
     - line: '|   accelerometerFrequency: 60'
     - line: '|   companyName: Luna Softworks'
-    - line: '|   productName: NikkiVDay'
+    - line: '|   productName: Lvl2dem'
     - line: '|   defaultCursor: {instanceID: 0}'
     - line: '|   cursorHotspot: {x: 0, y: 0}'
     - line: '|   m_SplashScreenBackgroundColor: {r: 0.048593808, g: 0.060413435,

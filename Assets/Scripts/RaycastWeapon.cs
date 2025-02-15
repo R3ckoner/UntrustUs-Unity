@@ -147,18 +147,28 @@ private IEnumerator Reload()
     isReloading = true;
     reloadSound?.Play();
 
-    if (weaponAnimator != null)
+    if (weaponAnimator != null && weaponAnimator.runtimeAnimatorController != null)
     {
-        weaponAnimator.enabled = true;  // ✅ Enable the Animator to play the animation
-        weaponAnimator.Play("Reload"); // ✅ Play the animation manually
-        yield return new WaitForSeconds(GetAnimationLength("Reload")); // Wait for animation to finish
-        weaponAnimator.enabled = false; // ❌ Disable Animator to reset position
+        float animLength = GetAnimationLength("Reload");
+
+        if (animLength > 0f) // ✅ Only play if animation exists
+        {
+            weaponAnimator.enabled = true;
+            weaponAnimator.Play("Reload");
+            yield return new WaitForSeconds(animLength);
+            weaponAnimator.enabled = false;
+        }
+        else
+        {
+            yield return PlayDefaultReloadAnimation(); // ✅ Fallback if animation doesn't exist
+        }
     }
     else
     {
-        yield return new WaitForSeconds(reloadTime);
+        yield return PlayDefaultReloadAnimation(); // ✅ Fallback if no Animator assigned
     }
 
+    // Reload logic
     int ammoToReload = Mathf.Min(magazineSize - currentAmmo, reserveAmmo);
     currentAmmo += ammoToReload;
     reserveAmmo -= ammoToReload;
@@ -166,6 +176,17 @@ private IEnumerator Reload()
     isReloading = false;
     UpdateAmmoUI();
 }
+private IEnumerator PlayDefaultReloadAnimation()
+{
+    Vector3 targetPosition = originalPosition + reloadPositionOffset;
+    Quaternion targetRotation = originalRotation * Quaternion.Euler(reloadRotationOffset);
+
+    yield return MoveWeapon(targetPosition, targetRotation, reloadSmoothTime);
+    yield return new WaitForSeconds(reloadTime - (2 * reloadSmoothTime));
+    yield return MoveWeapon(originalPosition, originalRotation, reloadSmoothTime);
+}
+
+
 
 private float GetAnimationLength(string animationName)
 {
