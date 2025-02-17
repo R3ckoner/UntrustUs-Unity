@@ -494,7 +494,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd82d9d443bc04dab91f6d8ca5727adc, type: 2}
+  - {fileID: 2100000, guid: 83bfacf8e494143f3976329bc41cb511, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -700,7 +700,7 @@ Transform:
   m_GameObject: {fileID: 289491437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3, y: 1.3, z: 5}
+  m_LocalPosition: {x: 2.866, y: 1.3, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsPosition: {fileID: 289491438}
-  transitionSpeed: 0.8
+  transitionSpeed: 0.7
   mainMenuObjects: {fileID: 1671798763}
   creditsObjects: {fileID: 132723688}
   backButton: {fileID: 1621038285}
@@ -5209,11 +5209,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e7bbf7ac55ae8d544b61e42f351e6ee4, type: 3}
-  m_Resource: {fileID: 8300000, guid: e7bbf7ac55ae8d544b61e42f351e6ee4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4870aca6e4819424a96fd6d0e0c570b2, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4870aca6e4819424a96fd6d0e0c570b2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.229
-  m_Pitch: 0.39
+  m_Volume: 0.17
+  m_Pitch: 0.95
   Loop: 0
   Mute: 0
   Spatialize: 0
