@@ -1,10 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI; // Assign PauseMenu panel in Inspector
+    public Slider volumeSlider; // Assign Slider in Inspector
     private bool isPaused = false;
+
+    void Start()
+    {
+        // Load saved volume level or set default
+        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1f);
+        AudioListener.volume = volumeSlider.value;
+        
+        // Add listener for volume changes
+        volumeSlider.onValueChanged.AddListener(SetVolume);
+    }
 
     void Update()
     {
@@ -48,5 +60,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; // Ensure time is normal before quitting
         Application.Quit(); // Quit game (only works in build)
         Debug.Log("Game Quit!"); // Debug for editor mode
+    }
+
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.Save(); // Save volume setting
     }
 }
