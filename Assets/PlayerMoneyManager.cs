@@ -19,11 +19,12 @@ public class PlayerMoneyManager : MonoBehaviour
         UpdateMoneyUI();
     }
 
-    public void AddMoney(int amount)
-    {
-        totalMoney += amount;
-        UpdateMoneyUI();
-    }
+public void AddMoney(int amount)
+{
+    totalMoney += amount;
+    savedTotalMoney = totalMoney; // Save the updated money amount
+    UpdateMoneyUI();
+}
 
     private void UpdateMoneyUI()
     {
