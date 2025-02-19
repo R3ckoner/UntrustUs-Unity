@@ -6,18 +6,25 @@ public class PlayerMoneyManager : MonoBehaviour
     [Header("UI Elements")]
     public TextMeshProUGUI moneyText; // Reference to the TMP UI for money display
 
-    private static int totalMoney = 0; // Money persists across scenes
+    // Static variable to persist money across scenes
+    public static int savedTotalMoney = 0;
 
-    private void Start()
+    private int totalMoney;
+
+    void Start()
     {
+        // Use savedTotalMoney if it's greater than 0; otherwise, initialize to 0
+        totalMoney = savedTotalMoney;
+
         UpdateMoneyUI();
     }
 
-    public void AddMoney(int amount)
-    {
-        totalMoney += amount;
-        UpdateMoneyUI();
-    }
+public void AddMoney(int amount)
+{
+    totalMoney += amount;
+    savedTotalMoney = totalMoney; // Save the updated money amount
+    UpdateMoneyUI();
+}
 
     private void UpdateMoneyUI()
     {
@@ -27,11 +34,16 @@ public class PlayerMoneyManager : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        // Save the current total money when switching scenes
+        savedTotalMoney = totalMoney;
+    }
+
     public void ResetMoney()
     {
         totalMoney = 0;
+        savedTotalMoney = 0;
         UpdateMoneyUI();
     }
-
-    public int GetTotalMoney() => totalMoney;
 }
