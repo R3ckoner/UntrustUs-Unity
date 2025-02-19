@@ -9,8 +9,7 @@ public class EnemyFollow : MonoBehaviour
 
     [Header("Audio Settings")]
     public AudioSource deathAudioSource;
-    public AudioClip triggerSound;
-    public AudioClip deathSound;
+    public AudioClip triggerSound, deathSound;
     [Range(0f, 1f)] public float deathSoundVolume = 1f;
 
     [Header("Health Settings")]
@@ -22,12 +21,10 @@ public class EnemyFollow : MonoBehaviour
 
     [Header("Gib Settings")]
     public GameObject gibPrefab;
-    public Vector3 gibSize = new Vector3(1f, 1f, 1f);
+    public Vector3 gibSize = Vector3.one;
 
     private bool isDead = false;
     private AudioSource triggerAudioSource;
-    private float lastTriggerSoundTime = 0f;
-    public float triggerSoundCooldown = 10f;
     private bool hasPlayedTriggerSound = false;
 
     [Header("Player Damage Settings")]
@@ -53,31 +50,46 @@ public class EnemyFollow : MonoBehaviour
 
         if (distance <= followDistance)
         {
-            if (!hasPlayedTriggerSound && triggerSound != null && triggerAudioSource != null)
-            {
-                triggerAudioSource.PlayOneShot(triggerSound);
-                hasPlayedTriggerSound = true;
-            }
+            PlayTriggerSound();
 
             if (distance > stopDistance)
             {
-                Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
-                Vector3 direction = (targetPosition - transform.position).normalized;
-
-                if (!Physics.Raycast(transform.position, direction, 0.75f))
-                {
-                    transform.position += direction * moveSpeed * Time.deltaTime;
-                }
+                MoveTowardsPlayer();
             }
 
-            Vector3 lookDirection = player.position - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            RotateTowardsPlayer();
         }
         else
         {
             hasPlayedTriggerSound = false;
         }
+    }
+
+    private void PlayTriggerSound()
+    {
+        if (!hasPlayedTriggerSound && triggerSound != null && triggerAudioSource != null)
+        {
+            triggerAudioSource.PlayOneShot(triggerSound);
+            hasPlayedTriggerSound = true;
+        }
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
+        Vector3 direction = (targetPosition - transform.position).normalized;
+
+        if (!Physics.Raycast(transform.position, direction, 0.75f))
+        {
+            transform.position += direction * moveSpeed * Time.deltaTime;
+        }
+    }
+
+    private void RotateTowardsPlayer()
+    {
+        Vector3 lookDirection = player.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     private void OnTriggerStay(Collider other)
@@ -91,8 +103,8 @@ public class EnemyFollow : MonoBehaviour
             {
                 playerHealth.TakeDamage(damageAmount);
                 lastDamageTime = Time.time;
-                
-                if (!isBoss) // Only die on collision if NOT a boss
+
+                if (!isBoss) // Non-boss enemies die after dealing damage
                 {
                     Die();
                 }
@@ -113,47 +125,50 @@ public class EnemyFollow : MonoBehaviour
         }
     }
 
-private void Die()
-{
-    if (isDead) return;
-    isDead = true;
-
-    Debug.Log("Enemy destroyed!");
-
-    // Grant reward to the player
-    PlayerMoneyManager moneyManager = FindObjectOfType<PlayerMoneyManager>();
-    if (moneyManager != null)
+    private void Die()
     {
-        moneyManager.AddMoney(rewardAmount);
-        Debug.Log($"Player received {rewardAmount} money! New balance: {PlayerMoneyManager.savedTotalMoney}");
+        if (isDead) return;
+        isDead = true;
+
+        Debug.Log("Enemy destroyed!");
+
+        // Reward Player
+        PlayerMoneyManager moneyManager = FindObjectOfType<PlayerMoneyManager>();
+        if (moneyManager != null)
+        {
+            moneyManager.AddMoney(rewardAmount);
+            Debug.Log($"Player received {rewardAmount} money! New balance: {moneyManager.GetTotalMoney()}");
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMoneyManager script not found!");
+        }
+
+        // Play Death Sound
+        if (deathAudioSource != null && deathSound != null)
+        {
+            deathAudioSource.PlayOneShot(deathSound, deathSoundVolume);
+        }
+
+        // Spawn Gibs
+        if (gibPrefab != null)
+        {
+            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
+            spawnedGibs.transform.localScale = gibSize;
+            Destroy(spawnedGibs, 60f);
+        }
+
+        // Disable Enemy Components
+        DisableEnemy();
+
+        Destroy(gameObject, 0f);
     }
-    else
+
+    private void DisableEnemy()
     {
-        Debug.LogWarning("PlayerMoneyManager script not found!");
+        if (GetComponent<Collider>() != null) GetComponent<Collider>().enabled = false;
+        if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().isKinematic = true;
+        if (GetComponent<MeshRenderer>() != null) GetComponent<MeshRenderer>().enabled = false;
+        moveSpeed = 0;
     }
-
-    if (deathAudioSource != null && deathSound != null)
-    {
-        deathAudioSource.PlayOneShot(deathSound, deathSoundVolume);
-    }
-
-    if (gibPrefab != null)
-    {
-        GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
-        spawnedGibs.transform.localScale = gibSize;
-        Destroy(spawnedGibs, 60f);
-    }
-
-    GetComponent<Collider>().enabled = false;
-    if (GetComponent<Rigidbody>() != null)
-    {
-        GetComponent<Rigidbody>().isKinematic = true;
-    }
-
-    GetComponent<MeshRenderer>().enabled = false;
-    moveSpeed = 0;
-
-    Destroy(gameObject, 0f);
-}
-
 }
