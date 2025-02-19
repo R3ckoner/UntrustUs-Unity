@@ -22,6 +22,9 @@ public class DoorController : MonoBehaviour
     private Quaternion closedRotation, openRotation;
     private bool isOpen = false, isAnimating = false, playerInRange = false;
 
+    // Global god mode toggle for doors
+    private static bool godModeDoors = false;
+
     void Start()
     {
         closedRotation = transform.rotation;
@@ -35,9 +38,16 @@ public class DoorController : MonoBehaviour
 
     void Update()
     {
+        // Toggle God Mode for doors with F1
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            godModeDoors = !godModeDoors;
+            Debug.Log($"🛠️ Door God Mode: {(godModeDoors ? "ENABLED" : "DISABLED")}");
+        }
+
         if (playerInRange && Input.GetKeyDown(interactKey) && !isAnimating)
         {
-            if (!requiresKey || keyCollected)
+            if (godModeDoors || !requiresKey || keyCollected) // God mode allows opening all doors
             {
                 StartCoroutine(RotateDoor(isOpen ? closedRotation : openRotation));
                 PlaySound(isOpen ? closeSound : openSound);
