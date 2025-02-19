@@ -96,7 +96,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PixelScale: 290
+    - _PixelScale: 206
     - _Scale: 11.2
     - _Shading: -9.3
     - _SmoothnessTextureChannel: 0
