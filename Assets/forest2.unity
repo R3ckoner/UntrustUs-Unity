@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 2595690}
   - component: {fileID: 2595689}
   - component: {fileID: 2595688}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecac26027dc33412e813f605d59a30f8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 23083048}
   - component: {fileID: 23083047}
   - component: {fileID: 23083046}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (59)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1709,7 +1709,7 @@ GameObject:
   - component: {fileID: 32387097}
   - component: {fileID: 32387096}
   - component: {fileID: 32387095}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (73)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2600,6 +2600,59 @@ Transform:
   - {fileID: 1879585348}
   m_Father: {fileID: 2092645088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &64228661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64228663}
+  - component: {fileID: 64228662}
+  m_Layer: 8
+  m_Name: WallRun (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &64228662
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64228661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &64228663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64228661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -53.7, y: 3.95, z: 77.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!1 &68785536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,7 +3001,7 @@ GameObject:
   - component: {fileID: 76467342}
   - component: {fileID: 76467341}
   - component: {fileID: 76467340}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (72)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3914,7 +3967,7 @@ GameObject:
   - component: {fileID: 104657628}
   - component: {fileID: 104657627}
   - component: {fileID: 104657626}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (38)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4022,7 +4075,7 @@ GameObject:
   - component: {fileID: 104903141}
   - component: {fileID: 104903140}
   - component: {fileID: 104903139}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4310,7 +4363,7 @@ GameObject:
   - component: {fileID: 115260000}
   - component: {fileID: 115259999}
   - component: {fileID: 115259998}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6220,7 +6273,7 @@ GameObject:
   - component: {fileID: 145610145}
   - component: {fileID: 145610144}
   - component: {fileID: 145610143}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8013,7 +8066,7 @@ GameObject:
   - component: {fileID: 183478359}
   - component: {fileID: 183478358}
   - component: {fileID: 183478357}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (56)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8663,8 +8716,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 150a574d7e12ea948ac40cb96c0d4237, type: 2}
-  m_sharedMaterial: {fileID: -6413777476690899139, guid: 150a574d7e12ea948ac40cb96c0d4237, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73a6747e0fade40e8937841c890aba11, type: 2}
+  m_sharedMaterial: {fileID: -2608517167920754240, guid: 73a6747e0fade40e8937841c890aba11, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9570,7 +9623,7 @@ GameObject:
   - component: {fileID: 232241227}
   - component: {fileID: 232241226}
   - component: {fileID: 232241225}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9926,7 +9979,7 @@ GameObject:
   - component: {fileID: 239159285}
   - component: {fileID: 239159284}
   - component: {fileID: 239159283}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (42)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10974,7 +11027,7 @@ GameObject:
   - component: {fileID: 324132308}
   - component: {fileID: 324132307}
   - component: {fileID: 324132306}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (46)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11082,7 +11135,7 @@ GameObject:
   - component: {fileID: 325299997}
   - component: {fileID: 325299996}
   - component: {fileID: 325299995}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (44)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11222,7 +11275,7 @@ GameObject:
   - component: {fileID: 333277088}
   - component: {fileID: 333277087}
   - component: {fileID: 333277086}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11408,7 +11461,7 @@ GameObject:
   - component: {fileID: 341236531}
   - component: {fileID: 341236530}
   - component: {fileID: 341236529}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13220,7 +13273,7 @@ GameObject:
   - component: {fileID: 387216762}
   - component: {fileID: 387216761}
   - component: {fileID: 387216760}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (64)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13655,7 +13708,7 @@ GameObject:
   - component: {fileID: 396011516}
   - component: {fileID: 396011515}
   - component: {fileID: 396011514}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14376,7 +14429,7 @@ GameObject:
   - component: {fileID: 422954827}
   - component: {fileID: 422954826}
   - component: {fileID: 422954825}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15371,7 +15424,7 @@ GameObject:
   - component: {fileID: 461986053}
   - component: {fileID: 461986052}
   - component: {fileID: 461986051}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15479,7 +15532,7 @@ GameObject:
   - component: {fileID: 467690671}
   - component: {fileID: 467690670}
   - component: {fileID: 467690669}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (71)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16458,7 +16511,7 @@ GameObject:
   - component: {fileID: 502789280}
   - component: {fileID: 502789279}
   - component: {fileID: 502789278}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16951,7 +17004,7 @@ GameObject:
   - component: {fileID: 520462371}
   - component: {fileID: 520462370}
   - component: {fileID: 520462369}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (61)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17320,7 +17373,7 @@ GameObject:
   - component: {fileID: 548517817}
   - component: {fileID: 548517816}
   - component: {fileID: 548517815}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (45)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18092,7 +18145,7 @@ GameObject:
   - component: {fileID: 576793014}
   - component: {fileID: 576793013}
   - component: {fileID: 576793012}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (81)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18188,6 +18241,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &579858207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579858209}
+  - component: {fileID: 579858208}
+  m_Layer: 8
+  m_Name: WallRun (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &579858208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579858207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &579858209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579858207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 57.9, y: 3.95, z: 75.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &583925235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fcb64f2cacfe8d64da7bdce8187fa43c, type: 3}
@@ -19394,7 +19500,7 @@ GameObject:
   - component: {fileID: 626568187}
   - component: {fileID: 626568186}
   - component: {fileID: 626568185}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (50)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20350,7 +20456,7 @@ GameObject:
   - component: {fileID: 681737075}
   - component: {fileID: 681737074}
   - component: {fileID: 681737073}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21094,7 +21200,7 @@ GameObject:
   - component: {fileID: 705662833}
   - component: {fileID: 705662832}
   - component: {fileID: 705662831}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21202,7 +21308,7 @@ GameObject:
   - component: {fileID: 708441566}
   - component: {fileID: 708441565}
   - component: {fileID: 708441564}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22121,6 +22227,59 @@ Transform:
   - {fileID: 1792751476}
   m_Father: {fileID: 2000552355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &759863448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 759863450}
+  - component: {fileID: 759863449}
+  m_Layer: 8
+  m_Name: WallRun (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &759863449
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759863448}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &759863450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759863448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -25.1, y: 5, z: -172}
+  m_LocalScale: {x: 0.59232324, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &760809940
 GameObject:
   m_ObjectHideFlags: 0
@@ -22165,7 +22324,7 @@ GameObject:
   - component: {fileID: 763003720}
   - component: {fileID: 763003719}
   - component: {fileID: 763003718}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23105,7 +23264,7 @@ GameObject:
   - component: {fileID: 787087841}
   - component: {fileID: 787087840}
   - component: {fileID: 787087839}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (51)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24049,7 +24208,7 @@ GameObject:
   - component: {fileID: 816858441}
   - component: {fileID: 816858440}
   - component: {fileID: 816858439}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24640,7 +24799,7 @@ GameObject:
   - component: {fileID: 849734441}
   - component: {fileID: 849734440}
   - component: {fileID: 849734439}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24775,7 +24934,7 @@ GameObject:
   - component: {fileID: 854868588}
   - component: {fileID: 854868587}
   - component: {fileID: 854868586}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (55)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26021,7 +26180,7 @@ GameObject:
   - component: {fileID: 882345143}
   - component: {fileID: 882345142}
   - component: {fileID: 882345141}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27006,7 +27165,7 @@ GameObject:
   - component: {fileID: 891937363}
   - component: {fileID: 891937362}
   - component: {fileID: 891937361}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27224,7 +27383,7 @@ GameObject:
   - component: {fileID: 895828628}
   - component: {fileID: 895828627}
   - component: {fileID: 895828626}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (74)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29888,7 +30047,7 @@ GameObject:
   - component: {fileID: 1018929220}
   - component: {fileID: 1018929219}
   - component: {fileID: 1018929218}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (52)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33086,7 +33245,7 @@ GameObject:
   - component: {fileID: 1152420188}
   - component: {fileID: 1152420187}
   - component: {fileID: 1152420186}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33227,7 +33386,7 @@ GameObject:
   - component: {fileID: 1157809929}
   - component: {fileID: 1157809928}
   - component: {fileID: 1157809927}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33435,7 +33594,7 @@ GameObject:
   - component: {fileID: 1166013606}
   - component: {fileID: 1166013605}
   - component: {fileID: 1166013604}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35275,7 +35434,7 @@ GameObject:
   - component: {fileID: 1210616548}
   - component: {fileID: 1210616547}
   - component: {fileID: 1210616546}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (43)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35371,6 +35530,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &1211241669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211241671}
+  - component: {fileID: 1211241670}
+  m_Layer: 8
+  m_Name: WallRun (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1211241670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211241669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1211241671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211241669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071089, z: -0, w: -0.70710474}
+  m_LocalPosition: {x: 79.36, y: 3.95, z: 39.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 4590, z: 0}
 --- !u!1001 &1215631691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36786,7 +36998,7 @@ GameObject:
   - component: {fileID: 1278226206}
   - component: {fileID: 1278226205}
   - component: {fileID: 1278226204}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36972,7 +37184,7 @@ GameObject:
   - component: {fileID: 1280927262}
   - component: {fileID: 1280927261}
   - component: {fileID: 1280927260}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (68)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37700,7 +37912,7 @@ GameObject:
   - component: {fileID: 1303926820}
   - component: {fileID: 1303926819}
   - component: {fileID: 1303926818}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38503,7 +38715,7 @@ GameObject:
   - component: {fileID: 1343470886}
   - component: {fileID: 1343470885}
   - component: {fileID: 1343470884}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (65)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39652,7 +39864,7 @@ GameObject:
   - component: {fileID: 1372812844}
   - component: {fileID: 1372812843}
   - component: {fileID: 1372812842}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40581,7 +40793,7 @@ GameObject:
   - component: {fileID: 1432615163}
   - component: {fileID: 1432615162}
   - component: {fileID: 1432615161}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44327,7 +44539,7 @@ GameObject:
   - component: {fileID: 1499003355}
   - component: {fileID: 1499003354}
   - component: {fileID: 1499003353}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (76)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44435,7 +44647,7 @@ GameObject:
   - component: {fileID: 1501123525}
   - component: {fileID: 1501123524}
   - component: {fileID: 1501123523}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (79)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45381,7 +45593,7 @@ GameObject:
   - component: {fileID: 1526754706}
   - component: {fileID: 1526754705}
   - component: {fileID: 1526754704}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45658,6 +45870,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: {x: 0, y: 0, z: 0}
+--- !u!1 &1536732863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536732865}
+  - component: {fileID: 1536732864}
+  m_Layer: 8
+  m_Name: WallRun (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1536732864
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536732863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1536732865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536732863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -75.82, y: 3.95, z: 23.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &1538763188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46630,6 +46895,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4034875309108595092, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1403652088}
+    - targetCorrespondingSourceObject: {fileID: 4034875309108595092, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1682243722}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8482899779377468131, guid: b230504e8b630432aa725d0cad0a9ad8, type: 3}
       insertIndex: -1
@@ -47141,7 +47409,7 @@ GameObject:
   - component: {fileID: 1577619589}
   - component: {fileID: 1577619588}
   - component: {fileID: 1577619587}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47751,6 +48019,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23d3327b4ece2c418f20c8615e06e0b, type: 3}
+--- !u!1 &1595736013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595736015}
+  - component: {fileID: 1595736014}
+  m_Layer: 8
+  m_Name: WallRun (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1595736014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595736013}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1595736015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595736013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -25.13, y: 5, z: -106.3}
+  m_LocalScale: {x: 1.4171, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1595998846
 GameObject:
   m_ObjectHideFlags: 0
@@ -48375,7 +48696,7 @@ GameObject:
   - component: {fileID: 1614292430}
   - component: {fileID: 1614292429}
   - component: {fileID: 1614292428}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (58)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48633,7 +48954,7 @@ GameObject:
   - component: {fileID: 1629620258}
   - component: {fileID: 1629620257}
   - component: {fileID: 1629620256}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (62)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49811,7 +50132,7 @@ GameObject:
   - component: {fileID: 1659390190}
   - component: {fileID: 1659390189}
   - component: {fileID: 1659390188}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (36)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50524,7 +50845,7 @@ GameObject:
   - component: {fileID: 1674467563}
   - component: {fileID: 1674467562}
   - component: {fileID: 1674467561}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50756,6 +51077,196 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675806886}
   m_CullTransparentMesh: 1
+--- !u!1 &1682243721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1682243722}
+  - component: {fileID: 1682243725}
+  - component: {fileID: 1682243724}
+  - component: {fileID: 1682243723}
+  m_Layer: 2
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1682243722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682243721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1401974895}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1682243723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682243721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!81 &1682243724
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682243721}
+  m_Enabled: 1
+--- !u!20 &1682243725
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682243721}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: bbecfe5a0036e4224a13bcd71d3b0012, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1 &1687400525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687400527}
+  - component: {fileID: 1687400526}
+  m_Layer: 8
+  m_Name: WallRun (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1687400526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687400525}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1687400527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687400525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.9, y: 5, z: -106.3}
+  m_LocalScale: {x: 1.4171, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1692149527
 GameObject:
   m_ObjectHideFlags: 0
@@ -51599,7 +52110,7 @@ GameObject:
   - component: {fileID: 1720186237}
   - component: {fileID: 1720186236}
   - component: {fileID: 1720186235}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (67)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53561,7 +54072,7 @@ GameObject:
   - component: {fileID: 1756515616}
   - component: {fileID: 1756515615}
   - component: {fileID: 1756515614}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (54)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53668,7 +54179,7 @@ GameObject:
   - component: {fileID: 1762656492}
   - component: {fileID: 1762656491}
   m_Layer: 8
-  m_Name: GameObject
+  m_Name: WallRun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53818,7 +54329,7 @@ GameObject:
   - component: {fileID: 1780218408}
   - component: {fileID: 1780218407}
   - component: {fileID: 1780218406}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (69)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53926,7 +54437,7 @@ GameObject:
   - component: {fileID: 1781872947}
   - component: {fileID: 1781872946}
   - component: {fileID: 1781872945}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54375,7 +54886,7 @@ GameObject:
   - component: {fileID: 1805447300}
   - component: {fileID: 1805447299}
   - component: {fileID: 1805447298}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54711,7 +55222,7 @@ GameObject:
   - component: {fileID: 1811846984}
   - component: {fileID: 1811846983}
   - component: {fileID: 1811846982}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (70)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54819,7 +55330,7 @@ GameObject:
   - component: {fileID: 1813007717}
   - component: {fileID: 1813007716}
   - component: {fileID: 1813007715}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (75)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55005,7 +55516,7 @@ GameObject:
   - component: {fileID: 1815978836}
   - component: {fileID: 1815978835}
   - component: {fileID: 1815978834}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55687,7 +56198,7 @@ GameObject:
   - component: {fileID: 1830667167}
   - component: {fileID: 1830667166}
   - component: {fileID: 1830667165}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (80)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56970,7 +57481,7 @@ GameObject:
   - component: {fileID: 1842070858}
   - component: {fileID: 1842070857}
   - component: {fileID: 1842070856}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (48)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57125,8 +57636,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 150a574d7e12ea948ac40cb96c0d4237, type: 2}
-  m_sharedMaterial: {fileID: -6413777476690899139, guid: 150a574d7e12ea948ac40cb96c0d4237, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73a6747e0fade40e8937841c890aba11, type: 2}
+  m_sharedMaterial: {fileID: -2608517167920754240, guid: 73a6747e0fade40e8937841c890aba11, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -59452,7 +59963,7 @@ GameObject:
   - component: {fileID: 1892665012}
   - component: {fileID: 1892665011}
   - component: {fileID: 1892665010}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (57)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59637,7 +60148,7 @@ GameObject:
   - component: {fileID: 1905031249}
   - component: {fileID: 1905031248}
   - component: {fileID: 1905031247}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59906,7 +60417,7 @@ GameObject:
   - component: {fileID: 1908508306}
   - component: {fileID: 1908508305}
   - component: {fileID: 1908508304}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60274,7 +60785,7 @@ GameObject:
   - component: {fileID: 1926673095}
   - component: {fileID: 1926673094}
   - component: {fileID: 1926673093}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (60)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60555,7 +61066,7 @@ GameObject:
   - component: {fileID: 1941353259}
   - component: {fileID: 1941353258}
   - component: {fileID: 1941353257}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (47)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61634,7 +62145,7 @@ GameObject:
   - component: {fileID: 1967131807}
   - component: {fileID: 1967131806}
   - component: {fileID: 1967131805}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (66)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62106,7 +62617,7 @@ GameObject:
   - component: {fileID: 1983548760}
   - component: {fileID: 1983548759}
   - component: {fileID: 1983548758}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (53)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62592,7 +63103,7 @@ GameObject:
   - component: {fileID: 1997624958}
   - component: {fileID: 1997624957}
   - component: {fileID: 1997624956}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62913,7 +63424,7 @@ GameObject:
   - component: {fileID: 2009998914}
   - component: {fileID: 2009998913}
   - component: {fileID: 2009998912}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63781,6 +64292,59 @@ Transform:
   - {fileID: 715968748}
   m_Father: {fileID: 68785537}
   m_LocalEulerAnglesHint: {x: 49.881, y: -13.6, z: -22.27}
+--- !u!1 &2019806449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2019806451}
+  - component: {fileID: 2019806450}
+  m_Layer: 8
+  m_Name: WallRun (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &2019806450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019806449}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70, y: 10.69, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2019806451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019806449}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -52.4, y: 3.95, z: -34.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1001 &2024475183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63940,7 +64504,7 @@ GameObject:
   - component: {fileID: 2026780528}
   - component: {fileID: 2026780527}
   - component: {fileID: 2026780526}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (78)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64048,7 +64612,7 @@ GameObject:
   - component: {fileID: 2029934775}
   - component: {fileID: 2029934774}
   - component: {fileID: 2029934773}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (35)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65354,7 +65918,7 @@ GameObject:
   - component: {fileID: 2053554772}
   - component: {fileID: 2053554771}
   - component: {fileID: 2053554770}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66622,7 +67186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 934677260012445866, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1061851635606641612, guid: 4f36dc275b2d7445bb7b3e01757c7a72, type: 3}
       propertyPath: m_TargetTexture
@@ -67766,7 +68330,7 @@ GameObject:
   - component: {fileID: 2074055271}
   - component: {fileID: 2074055270}
   - component: {fileID: 2074055269}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67874,7 +68438,7 @@ GameObject:
   - component: {fileID: 2074773382}
   - component: {fileID: 2074773381}
   - component: {fileID: 2074773380}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (77)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67982,7 +68546,7 @@ GameObject:
   - component: {fileID: 2082864681}
   - component: {fileID: 2082864680}
   - component: {fileID: 2082864679}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (49)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69406,7 +69970,7 @@ GameObject:
   - component: {fileID: 2133507037}
   - component: {fileID: 2133507036}
   - component: {fileID: 2133507035}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Fence_Long_Variant_1 (63)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75374,6 +75938,14 @@ SceneRoots:
   - {fileID: 1121268515}
   - {fileID: 976892622}
   - {fileID: 1762656492}
+  - {fileID: 1687400527}
+  - {fileID: 1595736015}
+  - {fileID: 759863450}
+  - {fileID: 64228663}
+  - {fileID: 1536732865}
+  - {fileID: 2019806451}
+  - {fileID: 579858209}
+  - {fileID: 1211241671}
   - {fileID: 2101100207}
   - {fileID: 116699099}
   - {fileID: 1560035128}
