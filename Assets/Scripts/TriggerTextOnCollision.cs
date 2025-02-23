@@ -5,63 +5,57 @@ using System.Collections;
 public class TriggerTextOnCollision : MonoBehaviour
 {
     [Header("Text Settings")]
-    public TextMeshProUGUI tutorialText;  // Reference to the TextMeshProUGUI component
-    public string tutorialMessage = "This is your tutorial advice!";  // The message to display for this pickup
-    public float fadeInTime = 1f;  // Time to fade in
-    public float fadeOutTime = 1f;  // Time to fade out
-    public float stayTime = 3f; // How long to display the text before fading out
+    public TextMeshProUGUI tutorialText;  
+    public string tutorialMessage = "This is your tutorial advice!";  
+    public float fadeInTime = 1f;  
+    public float fadeOutTime = 1f;  
+    public float stayTime = 3f;  
 
     [Header("Repeatable Toggle")]
-    public bool isRepeatable = true;  // Toggle to make the effect repeatable or not
+    public bool isRepeatable = true;  
 
     private CanvasGroup canvasGroup;
-    private bool hasTriggered = false;  // Flag to track if the text has already been shown
+    private bool hasTriggered = false;  
+    private Coroutine activeCoroutine = null; // Track the active coroutine
 
     private void Start()
     {
-        // Ensure we have a CanvasGroup for fading in/out.
-        canvasGroup = tutorialText.GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = tutorialText.gameObject.AddComponent<CanvasGroup>();
-        }
-
-        // Set initial alpha to 0 for the text to be invisible initially
+        canvasGroup = tutorialText.GetComponent<CanvasGroup>() ?? tutorialText.gameObject.AddComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player enters the trigger zone and if the effect is repeatable or not
         if (other.CompareTag("Player"))
         {
-            if (isRepeatable || !hasTriggered)  // If repeatable or hasn't triggered yet
+            if (isRepeatable || !hasTriggered)
             {
-                // Set the tutorial message dynamically each time
                 tutorialText.text = tutorialMessage;
 
-                // Start the text fade-in/fade-out effect
-                StartCoroutine(ShowTextEffect());
-                hasTriggered = true;  // Mark the text as triggered
+                // Stop any running coroutine before starting a new one
+                if (activeCoroutine != null)
+                {
+                    StopCoroutine(activeCoroutine);
+                }
+
+                activeCoroutine = StartCoroutine(ShowTextEffect());
+                hasTriggered = true;
             }
         }
     }
 
     private IEnumerator ShowTextEffect()
     {
-        // Fade in the text
         yield return FadeIn();
-
-        // Stay visible for the specified time
         yield return new WaitForSeconds(stayTime);
-
-        // Fade out the text
         yield return FadeOut();
 
         if (isRepeatable)
         {
-            hasTriggered = false;  // Allow the text to trigger again if it's repeatable
+            hasTriggered = false;
         }
+
+        activeCoroutine = null; // Reset active coroutine reference
     }
 
     private IEnumerator FadeIn()
@@ -69,12 +63,11 @@ public class TriggerTextOnCollision : MonoBehaviour
         float timeElapsed = 0f;
         while (timeElapsed < fadeInTime)
         {
-            // Gradually increase the alpha value to fade in
             canvasGroup.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeInTime);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        canvasGroup.alpha = 1f;  // Ensure the alpha is fully 1 after fading in
+        canvasGroup.alpha = 1f;
     }
 
     private IEnumerator FadeOut()
@@ -82,11 +75,10 @@ public class TriggerTextOnCollision : MonoBehaviour
         float timeElapsed = 0f;
         while (timeElapsed < fadeOutTime)
         {
-            // Gradually decrease the alpha value to fade out
             canvasGroup.alpha = Mathf.Lerp(1f, 0f, timeElapsed / fadeOutTime);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        canvasGroup.alpha = 0f;  // Ensure the alpha is fully 0 after fading out
+        canvasGroup.alpha = 0f;
     }
 }

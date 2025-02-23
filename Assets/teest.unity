@@ -1450,6 +1450,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (2)
@@ -1457,6 +1461,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2762,6 +2770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &170470185
 BoxCollider:
@@ -3275,6 +3284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &220906491
 BoxCollider:
@@ -3686,6 +3696,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (7)
@@ -3693,6 +3707,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4296,6 +4314,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun
@@ -4303,6 +4325,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7869,6 +7895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &618169283
 BoxCollider:
@@ -11789,6 +11816,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (4)
@@ -11796,6 +11827,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12337,6 +12372,9 @@ MonoBehaviour:
   reloadPositionOffset: {x: 0, y: -0.1, z: 0.1}
   reloadRotationOffset: {x: 0, y: 0, z: 0}
   reloadSmoothTime: 0.2
+  useCustomReload: 0
+  weaponAnimator: {fileID: 0}
+  reloadAnimationName: Reload
   fireSound: {fileID: 902148425}
   reloadSound: {fileID: 901724112}
 --- !u!114 &902148422
@@ -13083,6 +13121,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (6)
@@ -13090,6 +13132,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15620,6 +15666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1144475385
 BoxCollider:
@@ -21717,6 +21764,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (3)
@@ -21724,6 +21775,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22922,6 +22977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1649239637
 BoxCollider:
@@ -24338,6 +24394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 2039872826}
+  volumeSlider: {fileID: 0}
 --- !u!1001 &1756243931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25568,6 +25625,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (1)
@@ -25575,6 +25636,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26111,6 +26176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 50
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1892995655
 BoxCollider:
@@ -27073,6 +27139,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -3409518518573596038, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Name
       value: gatling-gun (5)
@@ -27080,6 +27150,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c34ce144e59e19042ad16fd7967b9b5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27801,6 +27875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 10
+  maxHealth: 100
   pickupSound: {fileID: 8300000, guid: 7ec1f616ca66eb44db2705ffd8324836, type: 3}
 --- !u!65 &1980129703
 BoxCollider:
@@ -28520,6 +28595,9 @@ MonoBehaviour:
   reloadPositionOffset: {x: 0, y: -0.1, z: 0.1}
   reloadRotationOffset: {x: 0, y: 0, z: 0}
   reloadSmoothTime: 0.2
+  useCustomReload: 0
+  weaponAnimator: {fileID: 0}
+  reloadAnimationName: Reload
   fireSound: {fileID: 2023519075}
   reloadSound: {fileID: 811632010}
 --- !u!82 &2023519075
