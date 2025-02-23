@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public Slider volumeSlider; // Assign Slider in Inspector
     public Slider sensitivitySlider;  // Assign Slider in Inspector for mouse sensitivity
     public SFPSC_FPSCamera fpsCamera;  // Reference to FPS Camera script
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
