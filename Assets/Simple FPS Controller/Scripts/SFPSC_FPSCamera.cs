@@ -115,5 +115,10 @@ public class SFPSC_FPSCamera : MonoBehaviour
         }
         rotZ = 0.0f;
     }
-}
 
+    // Method to update sensitivity
+    public void SetSensitivity(float value)
+    {
+        sensitivity = value;
+    }
+}

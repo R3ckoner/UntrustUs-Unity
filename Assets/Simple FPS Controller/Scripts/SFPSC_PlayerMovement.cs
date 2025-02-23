@@ -8,6 +8,9 @@ public class SFPSC_PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool enableMovement = true;
 
+    [Header("Gravity")]
+public float gravityMultiplier = 2.0f;  // Default is 1.0 for standard gravity
+
     [Header("Movement properties")]
     public float walkSpeed = 8.0f;
     public float runSpeed = 12.0f;
@@ -70,52 +73,59 @@ public class SFPSC_PlayerMovement : MonoBehaviour
     private Vector3 inputForce;
     private float prevY;
 
-    private void FixedUpdate()
+private void FixedUpdate()
+{
+    if ((wallRun != null && wallRun.IsWallRunning) || (grapplingHook != null && grapplingHook.IsGrappling))
+        isGrounded = false;
+    else
     {
-        if ((wallRun != null && wallRun.IsWallRunning) || (grapplingHook != null && grapplingHook.IsGrappling))
-            isGrounded = false;
-        else
+        isGrounded = (Mathf.Abs(rb.linearVelocity.y - prevY) < .1f) && (Physics.OverlapSphere(groundChecker.position, groundCheckerDist).Length > 1);
+        prevY = rb.linearVelocity.y;
+    }
+
+    // Input
+    vInput = Input.GetAxisRaw("Vertical");
+    hInput = Input.GetAxisRaw("Horizontal");
+
+    // Clamping speed
+    rb.linearVelocity = ClampMag(rb.linearVelocity, maximumPlayerSpeed);
+
+    if (!enableMovement)
+        return;
+
+    bool isSprinting = Input.GetKey(SFPSC_KeyManager.Run);
+    footstepInterval = isSprinting ? 0.3f : 0.5f; // Faster footsteps when sprinting
+
+    inputForce = (transform.forward * vInput + transform.right * hInput).normalized * (isSprinting ? runSpeed : walkSpeed);
+
+    if (isGrounded)
+    {
+        if (Input.GetButton("Jump") && !jumpBlocked)
         {
-            isGrounded = (Mathf.Abs(rb.linearVelocity.y - prevY) < .1f) && (Physics.OverlapSphere(groundChecker.position, groundCheckerDist).Length > 1);
-            prevY = rb.linearVelocity.y;
+            rb.AddForce(-jumpForce * rb.mass * Vector3.down);
+            jumpBlocked = true;
+            Invoke("UnblockJump", jumpCooldown);
         }
 
-        // Input
-        vInput = Input.GetAxisRaw("Vertical");
-        hInput = Input.GetAxisRaw("Horizontal");
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, inputForce, changeInStageSpeed * Time.fixedDeltaTime);
 
-        // Clamping speed
-        rb.linearVelocity = ClampMag(rb.linearVelocity, maximumPlayerSpeed);
-
-        if (!enableMovement)
-            return;
-
-        bool isSprinting = Input.GetKey(SFPSC_KeyManager.Run);
-        footstepInterval = isSprinting ? 0.3f : 0.5f; // Faster footsteps when sprinting
-
-        inputForce = (transform.forward * vInput + transform.right * hInput).normalized * (isSprinting ? runSpeed : walkSpeed);
-
-        if (isGrounded)
+        if ((vInput != 0 || hInput != 0) && !isPlayingFootstep)
         {
-            if (Input.GetButton("Jump") && !jumpBlocked)
-            {
-                rb.AddForce(-jumpForce * rb.mass * Vector3.down);
-                jumpBlocked = true;
-                Invoke("UnblockJump", jumpCooldown);
-            }
-
-            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, inputForce, changeInStageSpeed * Time.fixedDeltaTime);
-
-            if ((vInput != 0 || hInput != 0) && !isPlayingFootstep)
-            {
-                PlayFootstepSound();
-            }
-        }
-        else
-        {
-            rb.linearVelocity = ClampSqrMag(rb.linearVelocity + inputForce * Time.fixedDeltaTime, rb.linearVelocity.sqrMagnitude);
+            PlayFootstepSound();
         }
     }
+    else
+    {
+        rb.linearVelocity = ClampSqrMag(rb.linearVelocity + inputForce * Time.fixedDeltaTime, rb.linearVelocity.sqrMagnitude);
+    }
+
+    // Apply custom gravity
+    if (!isGrounded)
+    {
+        rb.AddForce(Vector3.up * Physics.gravity.y * gravityMultiplier, ForceMode.Acceleration);
+    }
+}
+
 
     private void PlayFootstepSound()
     {

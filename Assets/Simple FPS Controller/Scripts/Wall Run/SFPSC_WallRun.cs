@@ -115,30 +115,53 @@ public class SFPSC_WallRun : MonoBehaviour
     private Vector3 gravityForce;
     private bool isJumpAvailable = true;
 
-    private void AddForces(Vector3 wallNormal, bool right)
+private void AddForces(Vector3 wallNormal, bool right)
+{
+    if (isJumpAvailable && Input.GetKey(SFPSC_KeyManager.Jump))
     {
-        if (isJumpAvailable && Input.GetKey(SFPSC_KeyManager.Jump))
-        {
-            rb.AddForce((hitInfo.normal * jumpWallMultiplier + transform.forward * jumpForwardMultiplier + Vector3.up * jumpUpMultiplier).normalized * rb.mass * jumpForce);
-            isJumpAvailable = false;
-            Invoke(nameof(UnblockJump), jumpBlockTime);
-        }
-
-        if (t >= 0.0f)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, t, rb.linearVelocity.z);
-            t -= multiplier * Time.fixedDeltaTime;
-        }
-
-        mag = new Vector2(rb.linearVelocity.x, rb.linearVelocity.z).magnitude;
-        if (mag < minSpeedWhenAttached)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x / mag, rb.linearVelocity.y / minSpeedWhenAttached, rb.linearVelocity.z / mag) * minSpeedWhenAttached;
-
-        SFPSC_FPSCamera.cam.rotZ = right ? cameraTiltAngle : -cameraTiltAngle;
-
-        // Adjust grind sound volume based on speed
-        grindAudioSource.volume = Mathf.Clamp(mag / 20f, 0.2f, 1f); // Scale volume with speed
+        rb.AddForce((hitInfo.normal * jumpWallMultiplier + transform.forward * jumpForwardMultiplier + Vector3.up * jumpUpMultiplier).normalized * rb.mass * jumpForce);
+        isJumpAvailable = false;
+        Invoke(nameof(UnblockJump), jumpBlockTime);
     }
+
+    if (t >= 0.0f)
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, t, rb.linearVelocity.z);
+        t -= multiplier * Time.fixedDeltaTime;
+    }
+
+    mag = new Vector2(rb.linearVelocity.x, rb.linearVelocity.z).magnitude;
+    if (mag < minSpeedWhenAttached)
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x / mag, rb.linearVelocity.y / minSpeedWhenAttached, rb.linearVelocity.z / mag) * minSpeedWhenAttached;
+
+    // Calculate movement direction based on camera's forward and right direction
+    Vector3 cameraForward = SFPSC_FPSCamera.cam.transform.forward;
+    Vector3 cameraRight = SFPSC_FPSCamera.cam.transform.right;
+
+    // Flatten the forward and right vectors to avoid vertical movement
+    cameraForward.y = 0;
+    cameraRight.y = 0;
+
+    // Normalize them to maintain consistent speed
+    cameraForward.Normalize();
+    cameraRight.Normalize();
+
+    // Determine direction based on the camera's position
+    Vector3 moveDirection = cameraForward * Input.GetAxis("Vertical") + cameraRight * Input.GetAxis("Horizontal");
+
+    if (moveDirection != Vector3.zero)
+    {
+        // Apply the direction to the wall-running velocity
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, moveDirection * mag, Time.deltaTime * 10f);
+    }
+
+    SFPSC_FPSCamera.cam.rotZ = right ? cameraTiltAngle : -cameraTiltAngle;
+
+    // Adjust grind sound volume based on speed
+    grindAudioSource.volume = Mathf.Clamp(mag / 20f, 0.2f, 1f); // Scale volume with speed
+}
+
+
 
     private void UnblockJump()
     {

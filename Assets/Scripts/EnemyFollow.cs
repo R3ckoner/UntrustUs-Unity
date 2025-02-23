@@ -139,9 +139,29 @@ private void Die()
 
     if (gibPrefab != null)
     {
-        GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
-        spawnedGibs.transform.localScale = gibSize;
-        Destroy(spawnedGibs, 60f);
+        // Instantiate multiple gibs and randomize their rotations
+        for (int i = 0; i < 5; i++) // You can adjust the number of gibs here
+        {
+            // Create the gib object at the enemy's position
+            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
+            spawnedGibs.transform.localScale = gibSize;
+
+            // Randomize rotation: Use random rotation around the enemy's up vector (assuming up is the "forward" direction)
+            float randomX = Random.Range(-180f, 180f);
+            float randomY = Random.Range(-180f, 180f);
+            float randomZ = Random.Range(-180f, 180f);
+            spawnedGibs.transform.rotation = Quaternion.Euler(randomX, randomY, randomZ);
+
+            // Apply some force for a more natural explosion effect (optional)
+            Rigidbody gibRb = spawnedGibs.GetComponent<Rigidbody>();
+            if (gibRb != null)
+            {
+                gibRb.AddExplosionForce(10f, transform.position, 5f); // You can adjust the force and radius
+            }
+
+            // Destroy gib after a while
+            Destroy(spawnedGibs, 10f);
+        }
     }
 
     GetComponent<Collider>().enabled = false;
@@ -155,5 +175,6 @@ private void Die()
 
     Destroy(gameObject, 0f);
 }
+
 
 }

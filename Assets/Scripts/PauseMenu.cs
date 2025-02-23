@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI; // Assign PauseMenu panel in Inspector
     public Slider volumeSlider; // Assign Slider in Inspector
+    public Slider sensitivitySlider;  // Assign Slider in Inspector for mouse sensitivity
+    public SFPSC_FPSCamera fpsCamera;  // Reference to FPS Camera script
     private bool isPaused = false;
 
     void Start()
@@ -16,6 +18,13 @@ public class PauseMenu : MonoBehaviour
         
         // Add listener for volume changes
         volumeSlider.onValueChanged.AddListener(SetVolume);
+
+        // Initialize sensitivity slider based on current value
+        if (sensitivitySlider != null && fpsCamera != null)
+        {
+            sensitivitySlider.value = fpsCamera.sensitivity;
+            sensitivitySlider.onValueChanged.AddListener(UpdateSensitivity);
+        }
     }
 
     void Update()
@@ -67,5 +76,13 @@ public class PauseMenu : MonoBehaviour
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("Volume", volume);
         PlayerPrefs.Save(); // Save volume setting
+    }
+
+    public void UpdateSensitivity(float value)
+    {
+        if (fpsCamera != null)
+        {
+            fpsCamera.SetSensitivity(value);  // Update sensitivity in the camera script
+        }
     }
 }

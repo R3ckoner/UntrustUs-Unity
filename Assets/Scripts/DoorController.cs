@@ -109,4 +109,11 @@ public class DoorController : MonoBehaviour
         keyCollected = true;
         Debug.Log($"🔑 Key collected! The door '{gameObject.name}' is now unlocked.");
     }
+
+    // To control the God Mode from outside
+    public static void ToggleGodMode()
+    {
+        godModeDoors = !godModeDoors;
+        Debug.Log($"🛠️ Door God Mode: {(godModeDoors ? "ENABLED" : "DISABLED")}");
+    }
 }
