@@ -38,6 +38,8 @@ public class EnemyFollow : MonoBehaviour
     [Header("Boss Settings")]
     public bool isBoss = false; // Toggle for boss enemy
 
+    private static bool isKidMode = false; // Kid Mode toggle
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -47,6 +49,12 @@ public class EnemyFollow : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            isKidMode = !isKidMode;
+            Debug.Log("Kid Mode: " + (isKidMode ? "Enabled" : "Disabled"));
+        }
+
         if (isDead) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
@@ -113,68 +121,66 @@ public class EnemyFollow : MonoBehaviour
         }
     }
 
-private void Die()
-{
-    if (isDead) return;
-    isDead = true;
-
-    Debug.Log("Enemy destroyed!");
-
-    // Grant reward to the player
-    PlayerMoneyManager moneyManager = FindObjectOfType<PlayerMoneyManager>();
-    if (moneyManager != null)
+    private void Die()
     {
-        moneyManager.AddMoney(rewardAmount);
-        Debug.Log($"Player received {rewardAmount} money! New balance: {PlayerMoneyManager.savedTotalMoney}");
-    }
-    else
-    {
-        Debug.LogWarning("PlayerMoneyManager script not found!");
-    }
+        if (isDead) return;
+        isDead = true;
 
-    if (deathAudioSource != null && deathSound != null)
-    {
-        deathAudioSource.PlayOneShot(deathSound, deathSoundVolume);
-    }
+        Debug.Log("Enemy destroyed!");
 
-    if (gibPrefab != null)
-    {
-        // Instantiate multiple gibs and randomize their rotations
-        for (int i = 0; i < 5; i++) // You can adjust the number of gibs here
+        // Grant reward to the player
+        PlayerMoneyManager moneyManager = FindObjectOfType<PlayerMoneyManager>();
+        if (moneyManager != null)
         {
-            // Create the gib object at the enemy's position
-            GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
-            spawnedGibs.transform.localScale = gibSize;
-
-            // Randomize rotation: Use random rotation around the enemy's up vector (assuming up is the "forward" direction)
-            float randomX = Random.Range(-180f, 180f);
-            float randomY = Random.Range(-180f, 180f);
-            float randomZ = Random.Range(-180f, 180f);
-            spawnedGibs.transform.rotation = Quaternion.Euler(randomX, randomY, randomZ);
-
-            // Apply some force for a more natural explosion effect (optional)
-            Rigidbody gibRb = spawnedGibs.GetComponent<Rigidbody>();
-            if (gibRb != null)
-            {
-                gibRb.AddExplosionForce(10f, transform.position, 5f); // You can adjust the force and radius
-            }
-
-            // Destroy gib after a while
-            Destroy(spawnedGibs, 10f);
+            moneyManager.AddMoney(rewardAmount);
+            Debug.Log($"Player received {rewardAmount} money! New balance: {PlayerMoneyManager.savedTotalMoney}");
         }
+        else
+        {
+            Debug.LogWarning("PlayerMoneyManager script not found!");
+        }
+
+        if (deathAudioSource != null && deathSound != null)
+        {
+            deathAudioSource.PlayOneShot(deathSound, deathSoundVolume);
+        }
+
+        if (!isKidMode && gibPrefab != null)
+        {
+            // Instantiate multiple gibs and randomize their rotations
+            for (int i = 0; i < 5; i++) // You can adjust the number of gibs here
+            {
+                // Create the gib object at the enemy's position
+                GameObject spawnedGibs = Instantiate(gibPrefab, transform.position, Quaternion.identity);
+                spawnedGibs.transform.localScale = gibSize;
+
+                // Randomize rotation: Use random rotation around the enemy's up vector (assuming up is the "forward" direction)
+                float randomX = Random.Range(-180f, 180f);
+                float randomY = Random.Range(-180f, 180f);
+                float randomZ = Random.Range(-180f, 180f);
+                spawnedGibs.transform.rotation = Quaternion.Euler(randomX, randomY, randomZ);
+
+                // Apply some force for a more natural explosion effect (optional)
+                Rigidbody gibRb = spawnedGibs.GetComponent<Rigidbody>();
+                if (gibRb != null)
+                {
+                    gibRb.AddExplosionForce(10f, transform.position, 5f); // You can adjust the force and radius
+                }
+
+                // Destroy gib after a while
+                Destroy(spawnedGibs, 10f);
+            }
+        }
+
+        GetComponent<Collider>().enabled = false;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        GetComponent<MeshRenderer>().enabled = false;
+        moveSpeed = 0;
+
+        Destroy(gameObject, 0f);
     }
-
-    GetComponent<Collider>().enabled = false;
-    if (GetComponent<Rigidbody>() != null)
-    {
-        GetComponent<Rigidbody>().isKinematic = true;
-    }
-
-    GetComponent<MeshRenderer>().enabled = false;
-    moveSpeed = 0;
-
-    Destroy(gameObject, 0f);
-}
-
-
 }
